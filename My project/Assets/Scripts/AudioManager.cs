@@ -1,14 +1,15 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
     [SerializeField]
-    private AudioClip[] musicas, efeitosSonoros;
+    private AudioClip[] musicas,
+        efeitosSonoros;
+
     [SerializeField]
-    private AudioSource musicSource, SFXSource;
+    private AudioSource musicSource,
+        SFXSource;
 
     public void TocaMusica(string nomeMusica)
     {
@@ -45,5 +46,4 @@ public class AudioManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
-
 }
