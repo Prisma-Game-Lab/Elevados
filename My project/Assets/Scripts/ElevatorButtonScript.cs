@@ -15,15 +15,12 @@ public class ElevatorButtonScript : MonoBehaviour
     private Image button_image;
     private Image floor_image;
     private ButtonManager button_manager;
-    private Monstro monster_manager;
+    private MonsterManager monster_manager;
 
     public GameObject background_floor;
     public GameObject manager_object;
-    public GameObject monster_manager_object; // Referência ao objeto que possui o Monstro.cs
+    public GameObject monster_manager_object; // Referência ao objeto que possui MonsterManager
     public int floor; // adicione uma variável para o andar correspondente ao botão
-
-    //Variavel utilizada para verificar se o botao esta pressionado
-    //private int state;
     private bool isPressed;
 
     void Awake() //inicializa as referências a componentes que nao dependem de outros objetos
@@ -31,7 +28,7 @@ public class ElevatorButtonScript : MonoBehaviour
         button_image = GetComponent<Image>();
         floor_image = background_floor.GetComponent<Image>();
         button_manager = manager_object.GetComponent<ButtonManager>();
-        monster_manager = manager_object.GetComponent<Monstro>(); // inicializa a referencia ao Monstro
+        monster_manager = monster_manager_object.GetComponent<MonsterManager>(); // inicializa a referencia ao Monstro
     }
 
     // Start is called before the first frame update
@@ -61,6 +58,7 @@ public class ElevatorButtonScript : MonoBehaviour
         {
             SetButtonPressed();
             StartCoroutine(releaseButton());
+            Debug.Log($"Notificando o MonsterManager sobre o andar pressionado: {floor}");
             monster_manager.OnButtonPress(floor); // notifique o Monstro sobre o andar pressionado
         }
 
