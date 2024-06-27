@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class MonsterA : Monster
 {
-    private List<GameObject> buttons = new List<GameObject>();
+    private List<GameObject> buttons = new();
     private int numButtons;
     [SerializeField]
     private float tempoParaIniciar;
 
     void Start()
     {
-        var buttonManager = GameObject.Find("Canvas").transform.GetChild(2);
+        var buttonManager = GameObject.Find("Canvas").transform.GetChild(0);
         numButtons = buttonManager.transform.childCount;
         foreach (Transform child in buttonManager)
         {
