@@ -7,6 +7,9 @@ public class Monster : MonoBehaviour
     public int CurrentFloor { get; private set; }
     public int TargetFloor { get; private set; }
 
+    public int monster_type;
+    public int weight;
+
     public void Initialize(int currentFloor, int targetFloor)
     {
         CurrentFloor = currentFloor;

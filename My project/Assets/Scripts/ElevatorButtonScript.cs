@@ -14,7 +14,6 @@ public class ElevatorButtonScript : MonoBehaviour
 
     private Image button_image;
     private Image floor_image;
-    private ButtonManager button_manager;
     private MonsterManager monster_manager;
 
     public GameObject background_floor;
@@ -27,22 +26,12 @@ public class ElevatorButtonScript : MonoBehaviour
     {
         button_image = GetComponent<Image>();
         floor_image = background_floor.GetComponent<Image>();
-        button_manager = manager_object.GetComponent<ButtonManager>();
         monster_manager = monster_manager_object.GetComponent<MonsterManager>(); // inicializa a referencia ao Monstro
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        //Botao comeca nao pressionado, no estado 0
-        //state = 0;
-
-        //button_image = GetComponent<Image>();
-        //button_image.sprite = button_neutral;
-
-        //floor_image = background_floor.GetComponent<Image>();
-
-        //button_manager = manager_object.GetComponent<ButtonManager>();
         ResetButton();
     }
 
@@ -54,32 +43,16 @@ public class ElevatorButtonScript : MonoBehaviour
             return;
         }
 
-        if (button_manager.hold() == 1)
+        else
         {
-            SetButtonPressed();
-            StartCoroutine(releaseButton());
-            Debug.Log($"Notificando o MonsterManager sobre o andar pressionado: {floor}");
-            monster_manager.OnButtonPress(floor); // notifique o Monstro sobre o andar pressionado
-        }
-
-        /*/
-        if (state == 0)
-        {
-            if (button_manager.hold() == 1)
+            if (monster_manager.hold() == 1)
             {
-                state = 1;
-                button_image.sprite = button_pushed;
-                floor_image.sprite = button_floor;
-                print("Pressionado");
-
+                SetButtonPressed();
                 StartCoroutine(releaseButton());
+                Debug.Log($"Notificando o MonsterManager sobre o andar pressionado: {floor}");
+                monster_manager.OnButtonPress(floor); // notifique o Monstro sobre o andar pressionado
             }
         }
-
-        else { 
-            print("Calma ai rapaz"); 
-        }
-        /*/
     }
 
     private void SetButtonPressed()
@@ -94,13 +67,8 @@ public class ElevatorButtonScript : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         ResetButton();
-        /*/
-        state = 0;
-        button_image.sprite = button_neutral;
 
-        print("Solto");
-        /*/
-        button_manager.release();
+        monster_manager.release();
         Debug.Log("Ja pode pressionar");
     }
 
