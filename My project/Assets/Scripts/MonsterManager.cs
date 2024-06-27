@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class MonsterManager : MonoBehaviour
 {
     public List<GameObject> monsters; // Lista de monstros na cena
-    public int maxFloor = 8;
+    public int maxFloor = 7;
 
     void Start()
     {
@@ -17,13 +17,13 @@ public class MonsterManager : MonoBehaviour
         foreach (GameObject monsterObject in monsters)
         {
             Monster monster = monsterObject.GetComponent<Monster>();
-            int spawnFloor = Random.Range(1, maxFloor); // Andar de origem aleatório
-            int targetFloor = Random.Range(1, maxFloor); // Andar de destino aleatório
+            int spawnFloor = Random.Range(0, maxFloor); // Andar de origem aleatório
+            int targetFloor = Random.Range(0, maxFloor); // Andar de destino aleatório
 
             // Garantir que o andar de destino é diferente do andar de origem
             while (targetFloor == spawnFloor)
             {
-                targetFloor = Random.Range(1, maxFloor);
+                targetFloor = Random.Range(0, maxFloor);
             }
 
             monster.Initialize(spawnFloor, targetFloor);
