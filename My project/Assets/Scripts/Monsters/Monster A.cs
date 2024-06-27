@@ -19,7 +19,6 @@ public class MonsterA : Monster
         }
 
         StartCoroutine(EmbaralhaBotoes());
-        Debug.Log("começou a corrotina");
     }
 
     private IEnumerator EmbaralhaBotoes()
