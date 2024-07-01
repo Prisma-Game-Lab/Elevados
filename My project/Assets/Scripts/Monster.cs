@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
-    public int CurrentFloor { get; private set; }
-    public int TargetFloor { get; private set; }
+    public int currentFloor { get; private set; }
+    public int targetFloor { get; private set; }
 
     public int monster_type;
     public int weight;
 
-    public void Initialize(int currentFloor, int targetFloor)
+    public void Initiate(int currentFloor, int targetFloor)
     {
-        CurrentFloor = currentFloor;
-        TargetFloor = targetFloor;
-        Debug.Log($"Monstro {name} criado no andar {currentFloor} e deseja ir para o andar {targetFloor}");
+        this.currentFloor = currentFloor;
+        this.targetFloor = targetFloor;
+        Debug.Log($"Monstro criado no andar {currentFloor} e deseja ir para o andar {targetFloor}");
     }
 
     public void MoveToTargetFloor()
     {
-        if (CurrentFloor != TargetFloor)
+        if (currentFloor != targetFloor)
         {
             StartCoroutine(MoveAndCheckArrival());
         }
@@ -31,12 +31,12 @@ public class Monster : MonoBehaviour
         yield return new WaitForSeconds(2); 
 
         // Atualizar a posição do monstro para o andar desejado
-        CurrentFloor = TargetFloor;
+        currentFloor = targetFloor;
 
-        if (CurrentFloor == TargetFloor)
+        if (currentFloor == targetFloor)
         {
             gameObject.SetActive(false); // Desativar o monstro ao chegar no andar desejado
-            Debug.Log($"Monstro {name} desativado ao chegar no andar {CurrentFloor}");
+            Debug.Log($"Monstro desativado ao chegar no andar {currentFloor}");
         }
     }
 }

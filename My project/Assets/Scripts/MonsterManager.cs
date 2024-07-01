@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class MonsterManager : MonoBehaviour
 {
@@ -8,11 +9,15 @@ public class MonsterManager : MonoBehaviour
     //1 se algum botao estiver apertado
     private int buttonsReleased;
 
-    public List<GameObject> monsters; // Lista de monstros na cena
-    public int maxFloor = 8;
+    [SerializeField] private GameObject monsterPrefab;
+    
+    [SerializeField] private Level[] levels;
 
-    [SerializeField]
-    private Level[] levels;
+    private List<GameObject> elevator; // Lista de monstros na cena
+    [SerializeField] private int maxFloor = 8;
+
+    private List<GameObject>[] floors;
+    private int current_floor;
 
     private int current_level;
 
@@ -21,48 +26,61 @@ public class MonsterManager : MonoBehaviour
         buttonsReleased = 0;
         current_level = 0;
 
+        floors = new List<GameObject>[maxFloor];
+        current_floor = 0;
+
+        elevator = new List<GameObject>();
+
+        for(int i = 0; i < maxFloor; i++)
+        {
+            floors[i] = new List<GameObject>();
+        }
+
         InitializeMonsters();
     }
 
     void InitializeMonsters()
     {
-        foreach (GameObject monsterObject in monsters)
+        for (int i = 0; i < levels[current_level].qtd_monsters; i++)
         {
-            Monster monster = monsterObject.GetComponent<Monster>();
-            int spawnFloor = Random.Range(1, maxFloor); // Andar de origem aleatório
-            int targetFloor = Random.Range(1, maxFloor); // Andar de destino aleatório
+            GameObject monster = Instantiate(monsterPrefab, Vector3.zero, Quaternion.identity) as GameObject;
 
-            // Garantir que o andar de destino é diferente do andar de origem
-            while (targetFloor == spawnFloor)
+            int current_floor = Random.Range(1, maxFloor);
+            int targetFloor = Random.Range(1, maxFloor);
+
+            while (targetFloor == current_floor)
             {
                 targetFloor = Random.Range(1, maxFloor);
             }
 
-            monster.Initialize(spawnFloor, targetFloor);
-            monsterObject.SetActive(false); // Começar com todos os monstros desativados
+            monster.GetComponent<Monster>().Initiate(current_floor, targetFloor);
+
+            floors[current_floor].Add(monster);
+
+            monster.SetActive(false);
+
         }
     }
 
     public void OnButtonPress(int floor)
     {
+        current_floor = floor;
+        //TO DO: MUDAR TAMBEM O SPRITE DO ANDAR
+
         // Ativar monstros no andar pressionado
         ActivateMonstersOnFloor(floor);
 
         // Verificar se algum monstro deseja ir para o andar pressionado
-        foreach (GameObject monsterObject in monsters)
+        foreach (GameObject monsterObject in elevator)
         {
             Monster monster = monsterObject.GetComponent<Monster>();
-            if (monster.CurrentFloor == floor && !monsterObject.activeSelf)
+
+            if(monster.targetFloor == current_floor)
             {
-                Debug.Log($"Monstro {monster.name} está no andar {floor} e deseja ir para o andar {monster.TargetFloor}");
-                // monsterObject.SetActive(true); // Ativar o monstro
-                StartCoroutine(MoveMonster(monster));
-            }
-            else if (monster.TargetFloor == floor && monsterObject.activeSelf)
-            {
-                // Desativar monstro se o andar pressionado for o destino desejado
                 Debug.Log($"Monstro {monster.name} desativado ao chegar no andar {floor}");
-                monsterObject.SetActive(false);
+                
+                elevator.Remove(monsterObject);
+                Destroy(monsterObject);
             }
         }
     }
@@ -127,25 +145,24 @@ public class MonsterManager : MonoBehaviour
     IEnumerator MoveMonster(Monster monster)
     {
         // Somente mover o monstro se ele estiver ativo e se o andar atual for diferente do andar desejado
-        if (monster.gameObject.activeSelf && monster.CurrentFloor != monster.TargetFloor)
+        if (monster.gameObject.activeSelf && monster.currentFloor != monster.targetFloor)
         {
             yield return new WaitForSeconds(2); // Simula o tempo de espera para o monstro entrar no elevador
             monster.MoveToTargetFloor(); // Iniciar a movimentação do monstro
-            Debug.Log($"Monstro {monster.name} está se movendo para o andar {monster.TargetFloor}");
+            Debug.Log($"Monstro {monster.name} está se movendo para o andar {monster.targetFloor}");
         }
     }
 
     public void ActivateMonstersOnFloor(int floor)
     {
         // Ativar monstros no andar especificado
-        foreach (GameObject monsterObject in monsters)
+        foreach (GameObject monsterObject in floors[current_floor])
         {
-            Monster monster = monsterObject.GetComponent<Monster>();
-            if (monster.CurrentFloor == floor)
-            {
-                monsterObject.SetActive(true);
-                Debug.Log($"Monstro {monster.name} ativado no andar {floor}");
-            }
+            monsterObject.SetActive(true);
+            Debug.Log($"Monstro ativado no andar {floor}");
+
+            //TO DO: LEVAR EM CONTA PESO DO MONSTRO E VER QUAL MONSTRO NA FILA PODE ENTRAR
+            //O PRIMEIRO E SEMPRE O QUE ENTRA E SE ELE PASSAR O PESO O ELEVADOR FICA PESADO E N ENTRA MAIS NINGUEM
         }
     }
 

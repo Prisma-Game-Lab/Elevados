@@ -17,7 +17,6 @@ public class ElevatorButtonScript : MonoBehaviour
     private MonsterManager monster_manager;
 
     public GameObject background_floor;
-    public GameObject manager_object;
     public GameObject monster_manager_object; // Referência ao objeto que possui MonsterManager
     public int floor; // adicione uma variável para o andar correspondente ao botão
     private bool isPressed;
