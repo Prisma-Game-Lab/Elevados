@@ -13,7 +13,7 @@ public class ElevatorButtonScript : MonoBehaviour
     private Sprite button_floor;
 
     private Image button_image;
-    private Image floor_image;
+    [SerializeField] private GameObject[] floor_image;
     private ButtonManager button_manager;
     private MonsterManager monster_manager;
     private DoorController door_controller;
@@ -28,7 +28,6 @@ public class ElevatorButtonScript : MonoBehaviour
     void Awake() //inicializa as referências a componentes que nao dependem de outros objetos
     {
         button_image = GetComponent<Image>();
-        floor_image = background_floor.GetComponent<Image>();
         button_manager = manager_object.GetComponent<ButtonManager>();
         monster_manager = monster_manager_object.GetComponent<MonsterManager>(); // inicializa a referencia ao Monstro
         door_controller = door_controller_object.GetComponent<DoorController>();
@@ -50,7 +49,7 @@ public class ElevatorButtonScript : MonoBehaviour
 
         if (button_manager.hold() == 1)
         {
-            SetButtonPressed();
+            StartCoroutine(SetButtonPressed());
             StartCoroutine(releaseButton());
             Debug.Log($"Notificando o MonsterManager sobre o andar pressionado: {floor}");
             monster_manager.OnButtonPress(floor); // notifique o Monstro sobre o andar pressionado
@@ -78,12 +77,17 @@ public class ElevatorButtonScript : MonoBehaviour
         /*/
     }
 
-    private void SetButtonPressed()
+    private IEnumerator SetButtonPressed()
     {
         isPressed = true;
         button_image.sprite = button_pushed;
-        floor_image.sprite = button_floor;
-        Debug.Log("botao pressionado");
+        yield return new WaitForSeconds(2);
+        foreach(GameObject andar in floor_image)
+        {
+            andar.SetActive(false);
+        }
+        floor_image[floor].SetActive(true);
+        // Debug.Log("botao pressionado");
     }
 
     IEnumerator releaseButton()
