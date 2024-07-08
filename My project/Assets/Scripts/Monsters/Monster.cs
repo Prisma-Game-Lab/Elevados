@@ -1,37 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using TMPro;
 
 public class Monster : MonoBehaviour
 {
-    public int CurrentFloor { get; private set; }
-    public int TargetFloor { get; private set; }
-    private GameObject bolhaDeFala;
+    public int currentFloor { get; private set; }
+    public int targetFloor { get; private set; }
 
-    private void OnEnable()
-    {
-        bolhaDeFala = GameObject.Find("Canvas").transform.GetChild(1).gameObject;
-        bolhaDeFala.transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = TargetFloor.ToString();
-        bolhaDeFala.SetActive(true);
-    }
+    public int monster_type;
+    public int weight;
 
-    private void OnDisable()
+    public void Initiate(int currentFloor, int targetFloor)
     {
-        bolhaDeFala.SetActive(false);
-    }
-
-    public void Initialize(int currentFloor, int targetFloor)
-    {
-        CurrentFloor = currentFloor;
-        TargetFloor = targetFloor;
-        Debug.Log($"Monstro {name} criado no andar {currentFloor} e deseja ir para o andar {targetFloor}");
+        this.currentFloor = currentFloor;
+        this.targetFloor = targetFloor;
+        Debug.Log($"Monstro criado no andar {currentFloor} e deseja ir para o andar {targetFloor}");
     }
 
     public void MoveToTargetFloor()
     {
-        if (CurrentFloor != TargetFloor)
+        if (currentFloor != targetFloor)
         {
             StartCoroutine(MoveAndCheckArrival());
         }
@@ -43,12 +31,12 @@ public class Monster : MonoBehaviour
         yield return new WaitForSeconds(2); 
 
         // Atualizar a posição do monstro para o andar desejado
-        CurrentFloor = TargetFloor;
+        currentFloor = targetFloor;
 
-        if (CurrentFloor == TargetFloor)
+        if (currentFloor == targetFloor)
         {
             gameObject.SetActive(false); // Desativar o monstro ao chegar no andar desejado
-            Debug.Log($"Monstro {name} desativado ao chegar no andar {CurrentFloor}");
+            Debug.Log($"Monstro desativado ao chegar no andar {currentFloor}");
         }
     }
 }
