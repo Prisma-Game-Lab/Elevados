@@ -24,6 +24,7 @@ public class ElevatorButtonScript : MonoBehaviour
     public GameObject door_controller_object; // Referencia ao objeto que possui o DoorController
     public int floor; // adicione uma variável para o andar correspondente ao botão
     private bool isPressed;
+    public bool canPress = true;
 
     void Awake() //inicializa as referências a componentes que nao dependem de outros objetos
     {
@@ -47,7 +48,7 @@ public class ElevatorButtonScript : MonoBehaviour
             return;
         }
 
-        if (button_manager.hold() == 1)
+        if (button_manager.hold() == 1 && canPress)
         {
             StartCoroutine(SetButtonPressed());
             StartCoroutine(releaseButton());
