@@ -387,6 +387,7 @@ GameObject:
   - component: {fileID: 234553853}
   - component: {fileID: 234553851}
   - component: {fileID: 234553852}
+  - component: {fileID: 234553855}
   m_Layer: 5
   m_Name: Top
   m_TagString: Untagged
@@ -497,6 +498,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 234553849}
   m_CullTransparentMesh: 1
+--- !u!114 &234553855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234553849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bf2c321e506d6944bda16e5bd825e2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &336834314 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2172665916739195042, guid: 9866b201027050a4093c158399ce19b3, type: 3}
@@ -531,10 +544,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33ade83087b4df0488d2f7e7953d2146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsters:
-  - {fileID: 476036393}
-  - {fileID: 1429515316}
-  - {fileID: 1888132412}
+  monsterPrefab: {fileID: 0}
+  levels: []
   maxFloor: 8
 --- !u!4 &474242646
 Transform:
@@ -571,7 +582,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &476036394
 Transform:
   m_ObjectHideFlags: 0
@@ -651,6 +662,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ead5126493fd16842a0a14fab9b60214, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monster_type: 0
+  weight: 0
 --- !u!1 &483671483
 GameObject:
   m_ObjectHideFlags: 0
@@ -4241,7 +4254,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1429515317
 Transform:
   m_ObjectHideFlags: 0
@@ -4269,6 +4282,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a9a532ec6e47754fba822745c1088f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monster_type: 0
+  weight: 0
 --- !u!212 &1429515319
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4333,6 +4348,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5efeee1dfc6f76d4ca253d23e7155e7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monster_type: 0
+  weight: 0
 --- !u!1001 &1580385233
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5257,7 +5274,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1888132413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5270,6 +5287,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a9a532ec6e47754fba822745c1088f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monster_type: 0
+  weight: 0
 --- !u!212 &1888132414
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5349,6 +5368,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa4295b1725c1e4408e8eda2604c455f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monster_type: 0
+  weight: 0
   tempoParaIniciar: 0
 --- !u!1 &1899973434 stripped
 GameObject:

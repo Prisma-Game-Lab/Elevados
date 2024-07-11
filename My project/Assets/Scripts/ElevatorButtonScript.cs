@@ -19,7 +19,8 @@ public class ElevatorButtonScript : MonoBehaviour
     public GameObject background_floor;
     public GameObject monster_manager_object; // Referência ao objeto que possui MonsterManager
     public int floor; // adicione uma variável para o andar correspondente ao botão
-    private bool isPressed;
+    private bool isPressed; 
+    public bool canPress = true;
 
     void Awake() //inicializa as referências a componentes que nao dependem de outros objetos
     {
@@ -44,7 +45,7 @@ public class ElevatorButtonScript : MonoBehaviour
 
         else
         {
-            if (monster_manager.hold() == 1)
+            if (monster_manager.hold() == 1 && canPress)
             {
                 SetButtonPressed();
                 StartCoroutine(releaseButton());
