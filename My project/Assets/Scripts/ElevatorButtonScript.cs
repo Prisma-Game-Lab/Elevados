@@ -12,6 +12,9 @@ public class ElevatorButtonScript : MonoBehaviour
     [SerializeField]
     private Sprite button_floor;
 
+    [SerializeField]
+    private GameObject andar;
+
     private Image button_image;
     private Image floor_image;
     private MonsterManager monster_manager;
@@ -50,7 +53,7 @@ public class ElevatorButtonScript : MonoBehaviour
                 SetButtonPressed();
                 StartCoroutine(releaseButton());
                 Debug.Log($"Notificando o MonsterManager sobre o andar pressionado: {floor}");
-                monster_manager.OnButtonPress(floor); // notifique o Monstro sobre o andar pressionado
+                monster_manager.OnButtonPress(floor,andar); // notifique o Monstro sobre o andar pressionado
             }
         }
     }

@@ -9,6 +9,8 @@ public class MonsterManager : MonoBehaviour
     //1 se algum botao estiver apertado
     private int buttonsReleased;
 
+    [SerializeField] private GameObject andarAtual;
+
     [SerializeField] private GameObject monsterPrefab;
     
     [SerializeField] private Level[] levels;
@@ -62,8 +64,11 @@ public class MonsterManager : MonoBehaviour
         }
     }
 
-    public void OnButtonPress(int floor)
+    public void OnButtonPress(int floor, GameObject novo)
     {
+        andarAtual.SetActive(false);
+        novo.SetActive(true);
+        andarAtual = novo;
         current_floor = floor;
         //TO DO: MUDAR TAMBEM O SPRITE DO ANDAR
 

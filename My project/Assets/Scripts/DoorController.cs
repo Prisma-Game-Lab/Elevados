@@ -8,6 +8,7 @@ public class DoorController : MonoBehaviour
     public Animator doorAnimatorDireita;
     public MonsterManager monsterManager;
 
+
     private bool isMoving = false;
 
     void Start()
@@ -17,15 +18,15 @@ public class DoorController : MonoBehaviour
         doorAnimatorDireita.SetTrigger("Abrir 0");
     }
 
-    public void MoveElevator(int targetFloor)
+    public void MoveElevator(int targetFloor, GameObject novo)
     {
         if (!isMoving)
         {
-            StartCoroutine(MoveToFloor(targetFloor));
+            StartCoroutine(MoveToFloor(targetFloor, novo));
         }
     }
 
-    IEnumerator MoveToFloor(int targetFloor)
+    IEnumerator MoveToFloor(int targetFloor, GameObject novo)
     {
         isMoving = true;
         
@@ -44,7 +45,7 @@ public class DoorController : MonoBehaviour
         yield return new WaitForSeconds(2); // Tempo da animação de abrir a porta
 
         // Notifique o MonsterManager sobre o andar que foi alcançado
-        monsterManager.OnButtonPress(targetFloor);
+        monsterManager.OnButtonPress(targetFloor, novo);
 
         isMoving = false;
     }
