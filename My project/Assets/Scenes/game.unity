@@ -544,8 +544,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33ade83087b4df0488d2f7e7953d2146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterPrefab: {fileID: 0}
-  levels: []
+  monsterPrefab: {fileID: 4948845231422005302, guid: 398b9ecbd39bd8f4380d53e3b5d82049, type: 3}
+  levels:
+  - {fileID: 11400000, guid: f589db67a867762418d39ae9192a6de8, type: 2}
   maxFloor: 8
 --- !u!4 &474242646
 Transform:
