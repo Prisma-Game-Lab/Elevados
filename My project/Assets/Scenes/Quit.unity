@@ -160,8 +160,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1177.5, y: -463}
-  m_SizeDelta: {x: 150, y: 300}
+  m_AnchoredPosition: {x: 1199.8751, y: -446}
+  m_SizeDelta: {x: 194.7502, y: 358.6382}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &12050389
 MonoBehaviour:
@@ -179,9 +179,9 @@ MonoBehaviour:
     m_Left: 0
     m_Right: 0
     m_Top: 0
-    m_Bottom: 10
+    m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 0
+  m_Spacing: -40.82
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -202,14 +202,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.48427665, g: 0.25834763, b: 0.05025507, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c38ae436df69114469d2167a45465d69, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6f35b4eef14b04b4fa548cb8327d083f, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -218,7 +218,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 2.52
 --- !u!222 &12050391
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -922,7 +922,7 @@ GameObject:
   - component: {fileID: 1043205848}
   - component: {fileID: 1043205847}
   m_Layer: 5
-  m_Name: Button
+  m_Name: X
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -971,9 +971,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.35686275, g: 0.35686275, b: 0.35686275, a: 1}
-    m_HighlightedColor: {r: 0.9433962, g: 0.7623716, b: 0, a: 1}
+    m_HighlightedColor: {r: 1, g: 0, b: 0, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.6792453, g: 0.54677844, b: 0, a: 1}
+    m_SelectedColor: {r: 0.509434, g: 0, b: 0, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1302,9 +1302,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.35686275, g: 0.35686275, b: 0.35686275, a: 1}
-    m_HighlightedColor: {r: 0.9433962, g: 0.7623716, b: 0, a: 1}
+    m_HighlightedColor: {r: 0, g: 1, b: 0, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.6792453, g: 0.54677844, b: 0, a: 1}
+    m_SelectedColor: {r: 0, g: 0.63522005, b: 0, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
