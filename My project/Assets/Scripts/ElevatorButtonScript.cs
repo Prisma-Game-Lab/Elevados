@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ElevatorButtonScript : MonoBehaviour
+public class ElevatorButtonScript : MonoBehaviour 
 {
     [SerializeField]
     private Sprite button_pushed;
@@ -62,15 +62,16 @@ public class ElevatorButtonScript : MonoBehaviour
     {
         isPressed = true;
         button_image.sprite = button_pushed;
-        floor_image.sprite = button_floor;
+        // floor_image.sprite = button_floor;
         Debug.Log("botao pressionado");
     }
 
     IEnumerator releaseButton()
     {
+        Debug.Log("Iniciando corrotina releaseButton");
         yield return new WaitForSeconds(2);
+        Debug.Log("Executando ResetButton");
         ResetButton();
-
         monster_manager.release();
         Debug.Log("Ja pode pressionar");
     }

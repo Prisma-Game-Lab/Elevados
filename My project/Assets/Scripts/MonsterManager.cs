@@ -16,7 +16,7 @@ public class MonsterManager : MonoBehaviour
     [SerializeField] private Level[] levels;
 
     private List<GameObject> elevator; // Lista de monstros na cena
-    [SerializeField] private int maxFloor = 8;
+    [SerializeField] private int maxFloor = 6;
 
     private List<GameObject>[] floors;
     private int current_floor;
