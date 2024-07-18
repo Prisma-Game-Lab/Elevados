@@ -24,15 +24,10 @@ public class MonsterA : Monster
     private IEnumerator EmbaralhaBotoes()
     {
         yield return new WaitForSeconds(tempoParaIniciar);
-        int button1 = 0, button2 = 0;
 
-        while (button1 == button2)
+        for (int i = 0; i < buttons.Count; i += 2)
         {
-            button1 = Random.Range(0, numButtons - 1);
-            button2 = Random.Range(0, numButtons - 1);
+            buttons[i].transform.SetSiblingIndex(buttons[i+1].transform.GetSiblingIndex());
         }
-
-        buttons[button1].transform.SetSiblingIndex(button2);
-        Debug.Log("trocou os botões");
     }
 }
