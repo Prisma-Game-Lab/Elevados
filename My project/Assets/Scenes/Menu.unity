@@ -2126,15 +2126,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1885734944}
-        m_TargetAssemblyTypeName: ButtonQuit, Assembly-CSharp
-        m_MethodName: Quit
-        m_Mode: 1
+        m_TargetAssemblyTypeName: ButtonMenu, Assembly-CSharp
+        m_MethodName: TrocaCena
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Credits
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1885734942
@@ -2184,7 +2184,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1885734939}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8500f1eb71564b0d6baf13f140c16bc1, type: 3}
+  m_Script: {fileID: 11500000, guid: ce7c99601b812e852bdfb956630461e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1907157616

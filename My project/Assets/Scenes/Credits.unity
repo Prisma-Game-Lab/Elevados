@@ -689,6 +689,10 @@ PrefabInstance:
       propertyPath: m_Colors.m_HighlightedColor.r
       value: 0.9433962
       objectReference: {fileID: 0}
+    - target: {fileID: 8030696410255580226, guid: d0768390fefd3837682f8d5a51e34a2a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Menu
+      objectReference: {fileID: 0}
     - target: {fileID: 8354696731636958037, guid: d0768390fefd3837682f8d5a51e34a2a, type: 3}
       propertyPath: m_Name
       value: ButtonMenu
