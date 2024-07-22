@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Monster : MonoBehaviour
 {
@@ -9,11 +10,14 @@ public class Monster : MonoBehaviour
 
     public int monster_type;
     public int weight;
+    private GameObject balão;
 
     public void Initiate(int currentFloor, int targetFloor)
     {
         this.currentFloor = currentFloor;
         this.targetFloor = targetFloor;
+        balão = GameObject.Find("Balão");
+        balão.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = targetFloor.ToString();
         Debug.Log($"Monstro criado no andar {currentFloor} e deseja ir para o andar {targetFloor}");
     }
 

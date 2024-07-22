@@ -9,7 +9,7 @@ public class MonsterC : Monster
     private int numButtons;
     void Start()
     {
-        var buttonManager = GameObject.Find("Canvas").transform.GetChild(0);
+        var buttonManager = GameObject.Find("ButtonManager").transform;
         numButtons = buttonManager.transform.childCount;
         foreach (Transform child in buttonManager)
         {
