@@ -624,11 +624,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33ade83087b4df0488d2f7e7953d2146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  andarAtual: {fileID: 0}
+  andarAtual: {fileID: 967956596}
   monsterPrefab: {fileID: 4948845231422005302, guid: 398b9ecbd39bd8f4380d53e3b5d82049, type: 3}
   levels:
   - {fileID: 11400000, guid: f589db67a867762418d39ae9192a6de8, type: 2}
-  maxFloor: 8
+  maxFloor: 6
 --- !u!4 &474242646
 Transform:
   m_ObjectHideFlags: 0
@@ -1393,7 +1393,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorAnimatorEsquerda: {fileID: 739409643}
   doorAnimatorDireita: {fileID: 1899973437}
-  Grade: {fileID: 806068835}
   monsterManager: {fileID: 474242645}
 --- !u!1 &627162736
 GameObject:
@@ -1580,7 +1579,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorAnimatorEsquerda: {fileID: 739409643}
   doorAnimatorDireita: {fileID: 1899973437}
-  Grade: {fileID: 806068835}
   monsterManager: {fileID: 474242645}
 --- !u!1001 &760686051
 PrefabInstance:
@@ -2292,7 +2290,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorAnimatorEsquerda: {fileID: 739409643}
   doorAnimatorDireita: {fileID: 1899973437}
-  Grade: {fileID: 806068835}
   monsterManager: {fileID: 474242645}
 --- !u!224 &852636964 stripped
 RectTransform:
@@ -5814,7 +5811,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorAnimatorEsquerda: {fileID: 739409643}
   doorAnimatorDireita: {fileID: 1899973437}
-  Grade: {fileID: 806068835}
   monsterManager: {fileID: 474242645}
 --- !u!1001 &1971555123
 PrefabInstance:
@@ -6112,7 +6108,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorAnimatorEsquerda: {fileID: 739409643}
   doorAnimatorDireita: {fileID: 1899973437}
-  Grade: {fileID: 806068835}
   monsterManager: {fileID: 474242645}
 --- !u!1 &2006564848
 GameObject:
