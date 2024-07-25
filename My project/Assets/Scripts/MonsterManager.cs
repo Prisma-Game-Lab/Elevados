@@ -88,6 +88,14 @@ public class MonsterManager : MonoBehaviour
                 Destroy(monsterObject);
             }
         }
+        // Adicionar pontos baseados no peso do monstro (POSSIVEL PARTE DO SCRIPT para
+        // FAZER FUNCIONAR A PONTUAÇAO DO JOGO, CHECAR ENTRE OS PROGS)
+        // MonsterWeight weight = monster.GetComponent<MonsterWeight>();
+        // if (weight != null)
+        // {
+        //     int points = weight.GetWeightPoints();
+        //     ScoreManager.instance.AddScore(points);
+        // }
     }
 
     // IEnumerator MonsterLoop()
