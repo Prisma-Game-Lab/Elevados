@@ -8,7 +8,7 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager instance; // Singleton
 
-    private int score = 0;
+    public int score = 0;
     public int targetScore = 15; // Pontuação necessária para ganhar
     public event Action<int> onScoreChanged; // Evento de mudança de pontuação
 
