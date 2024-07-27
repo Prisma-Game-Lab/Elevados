@@ -8,10 +8,16 @@ public class ScoreUI : MonoBehaviour
     void Start()
     {
         // Inicializa a pontuação com o valor atual
-        UpdateScore(ScoreManager.instance.GetScore());
-        
-        // Inscreve-se no evento de mudança de pontuação
-        ScoreManager.instance.onScoreChanged += UpdateScore;
+        if (ScoreManager.instance != null)
+        {
+            UpdateScore(ScoreManager.instance.GetScore());
+            // Inscreve-se no evento de mudança de pontuação
+            ScoreManager.instance.onScoreChanged += UpdateScore;
+        }
+        else
+        {
+            Debug.LogError("ScoreManager.instance é nulo no Start do ScoreUI.");
+        }
     }
 
     void OnDestroy()
@@ -25,6 +31,13 @@ public class ScoreUI : MonoBehaviour
 
     void UpdateScore(int newScore)
     {
-        scoreText.text = "Gorjeta: " + newScore.ToString();
+        if (scoreText != null)
+        {
+            scoreText.text += newScore.ToString();
+        }
+        else
+        {
+            Debug.LogError("scoreText é nulo em UpdateScore.");
+        }
     }
 }
