@@ -1,7 +1,9 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
+using System.Linq;
 
 public class MonsterManager : MonoBehaviour
 {
@@ -12,7 +14,7 @@ public class MonsterManager : MonoBehaviour
     [SerializeField] private GameObject andarAtual;
 
     [SerializeField] private GameObject monsterPrefab;
-    
+    [SerializeField] private GameObject balão;
     [SerializeField] private Level[] levels;
 
     private List<GameObject> elevator; // Lista de monstros na cena
@@ -45,7 +47,7 @@ public class MonsterManager : MonoBehaviour
     {
         for (int i = 0; i < levels[current_level].qtd_monsters; i++)
         {
-            GameObject monster = Instantiate(monsterPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+            GameObject monster = Instantiate(monsterPrefab, new Vector3(-5f, 0, 0), Quaternion.identity, transform);
 
             int current_floor = Random.Range(1, maxFloor);
             int targetFloor = Random.Range(1, maxFloor);
@@ -66,7 +68,7 @@ public class MonsterManager : MonoBehaviour
 
     public void OnButtonPress(int floor, GameObject novo)
     {
-        andarAtual.SetActive(false);
+        //andarAtual.SetActive(false);
         novo.SetActive(true);
         andarAtual = novo;
         current_floor = floor;
@@ -155,7 +157,7 @@ public class MonsterManager : MonoBehaviour
     //     }
     // }
 
-    IEnumerator MoveMonster(Monster monster)
+    public IEnumerator MoveMonster(Monster monster)
     {
         // Somente mover o monstro se ele estiver ativo e se o andar atual for diferente do andar desejado
         if (monster.gameObject.activeSelf && monster.currentFloor != monster.targetFloor)
@@ -173,6 +175,8 @@ public class MonsterManager : MonoBehaviour
         {
             monsterObject.SetActive(true);
             Debug.Log($"Monstro ativado no andar {floor}");
+            balão.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = monsterObject.GetComponent<Monster>().targetFloor.ToString();
+            balão.SetActive(true);
 
             //TO DO: LEVAR EM CONTA PESO DO MONSTRO E VER QUAL MONSTRO NA FILA PODE ENTRAR
             //O PRIMEIRO E SEMPRE O QUE ENTRA E SE ELE PASSAR O PESO O ELEVADOR FICA PESADO E N ENTRA MAIS NINGUEM

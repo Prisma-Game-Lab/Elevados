@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,6 +34,9 @@ public class ElevatorButtonScript : MonoBehaviour
         {
             cronometro = FindObjectOfType<Cronometro>();
         }
+        // Pega o número do andar atual correto a partir do número escrito no botão
+        floor = int.Parse(transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text);
+
         button_image = GetComponent<Image>();
         floor_image = background_floor.GetComponent<Image>();
         monster_manager = monster_manager_object.GetComponent<MonsterManager>(); // inicializa a referencia ao Monstro
@@ -59,7 +63,7 @@ public class ElevatorButtonScript : MonoBehaviour
                 SetButtonPressed();
                 StartCoroutine(releaseButton());
                 Debug.Log($"Notificando o MonsterManager sobre o andar pressionado: {floor}");
-                monster_manager.OnButtonPress(floor,andar); // notifique o Monstro sobre o andar pressionado
+                monster_manager.OnButtonPress(floor, andar); // notifique o Monstro sobre o andar pressionado
 
                 // Iniciar cronômetro quando o botão de um andar diferente do andar inicial for pressionado
                 if (floor != 1)

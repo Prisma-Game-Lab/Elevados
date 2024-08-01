@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class Monster : MonoBehaviour
 {
@@ -10,14 +9,11 @@ public class Monster : MonoBehaviour
 
     public int monster_type;
     public int weight;
-    private GameObject balão;
 
     public void Initiate(int currentFloor, int targetFloor)
     {
         this.currentFloor = currentFloor;
         this.targetFloor = targetFloor;
-        balão = GameObject.Find("Balão");
-        balão.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = targetFloor.ToString();
         Debug.Log($"Monstro criado no andar {currentFloor} e deseja ir para o andar {targetFloor}");
     }
 
@@ -39,8 +35,10 @@ public class Monster : MonoBehaviour
 
         if (currentFloor == targetFloor)
         {
-            gameObject.SetActive(false); // Desativar o monstro ao chegar no andar desejado
             Debug.Log($"Monstro desativado ao chegar no andar {currentFloor}");
+            // Desativar o monstro ao chegar no andar desejado
+            Destroy(gameObject);
+
         }
     }
 }
