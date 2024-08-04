@@ -2257,6 +2257,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1219735841}
+  - component: {fileID: 1219735842}
   m_Layer: 5
   m_Name: Settings
   m_TagString: Untagged
@@ -2291,6 +2292,20 @@ RectTransform:
   m_AnchoredPosition: {x: -343, y: 109}
   m_SizeDelta: {x: 900, y: 574.0901}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1219735842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1219735840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33af3ad90d2efe8479bc99f132edde80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicSlider: {fileID: 1467286995}
+  sfxSlider: {fileID: 1458823518}
 --- !u!224 &1317832503 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1513414985650064434, guid: d0768390fefd3837682f8d5a51e34a2a, type: 3}

@@ -7,4 +7,11 @@ public class ButtonMenu : MonoBehaviour
     {
         SceneManager.LoadScene(cena);
     }
+
+    // Carrega a cena anterior e reinicia a música
+    public void LoadPreviousScene(string cena, string musica)
+    {
+        AudioManager.instance.ReiniciaMusica(musica);
+        SceneManager.LoadScene(cena);
+    }
 }
