@@ -6,10 +6,10 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
 
     [SerializeField]
-    private AudioClip[] musicas, efeitosSonoros; // Arrays para armazenar as músicas e os efeitos sonoros
+    public AudioClip[] musicas, efeitosSonoros; // Arrays para armazenar as músicas e os efeitos sonoros
 
     [SerializeField]
-    public AudioSource musicSource, SFXSource; // AudioSources para tocar música e efeitos sonoros
+    public AudioSource MusicSource, SfxSource; // AudioSources para tocar música e efeitos sonoros
 
     // void Awake()
     // {
@@ -29,7 +29,7 @@ public class AudioManager : MonoBehaviour
     public void TocaMusica(string nomeMusica)
     {
         // Verifica se a música atual já é a que está tocando
-        if (musicSource.clip != null && musicSource.clip.name == nomeMusica && musicSource.isPlaying)
+        if (MusicSource.clip != null && MusicSource.clip.name == nomeMusica && MusicSource.isPlaying)
         {
             ReiniciaMusica(nomeMusica);
         }
@@ -42,8 +42,8 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        musicSource.clip = musica;
-        musicSource.Play();
+        MusicSource.clip = musica;
+        MusicSource.Play();
     }
 
     // Toca um efeito sonoro pelo nome
@@ -57,14 +57,14 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        SFXSource.clip = efeito;
-        SFXSource.Play();
+        SfxSource.clip = efeito;
+        SfxSource.Play();
     }
 
     public void ReiniciaMusica(string nomeMusica)
     {
         // Para a música atual
-        musicSource.Stop();
+        MusicSource.Stop();
 
         // Inicia a música novamente
         TocaMusica(nomeMusica);
@@ -72,11 +72,11 @@ public class AudioManager : MonoBehaviour
 
     public void SetMusicVolume(float volume)
     {
-        musicSource.volume = volume;
+        MusicSource.volume = volume;
     }
 
     public void SetSFXVolume(float volume)
     {
-        SFXSource.volume = volume;
+        SfxSource.volume = volume;
     }
 }

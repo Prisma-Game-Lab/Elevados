@@ -10,11 +10,37 @@ public class SettingsMenu : MonoBehaviour
 
     void Start()
     {
-        // Definir os sliders para os volumes atuais
-        musicSlider.value = AudioManager.instance.musicSource.volume;
-        sfxSlider.value = AudioManager.instance.SFXSource.volume;
+        if (AudioManager.instance == null)
+        {
+            AudioManager.instance = FindObjectOfType<AudioManager>();
 
-        // Adicionar listeners aos sliders para chamar os métodos de ajuste de volume
+            if (AudioManager.instance == null)
+            {
+                Debug.LogError("AudioManager não foi encontrado na cena.");
+                return;
+            }
+        }
+
+        // Definir os sliders para os volumes atuais
+        if (AudioManager.instance.MusicSource != null)
+        {
+            musicSlider.value = AudioManager.instance.MusicSource.volume;
+        }
+        else
+        {
+            Debug.LogWarning("MusicSource não está atribuído no AudioManager.");
+        }
+
+        if (AudioManager.instance.SfxSource != null)
+        {
+            sfxSlider.value = AudioManager.instance.SfxSource.volume;
+        }
+        else
+        {
+            Debug.LogWarning("SfxSource não está atribuído no AudioManager.");
+        }
+
+        // Adicionar listeners aos sliders
         musicSlider.onValueChanged.AddListener(SetMusicVolume);
         sfxSlider.onValueChanged.AddListener(SetSFXVolume);
     }

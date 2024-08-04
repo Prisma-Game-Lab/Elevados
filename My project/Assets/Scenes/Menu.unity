@@ -2177,8 +2177,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicas: []
   efeitosSonoros: []
-  musicSource: {fileID: 423107174}
-  SFXSource: {fileID: 0}
+  MusicSource: {fileID: 423107174}
+  SfxSource: {fileID: 444424495}
 --- !u!4 &1724811574
 Transform:
   m_ObjectHideFlags: 0
