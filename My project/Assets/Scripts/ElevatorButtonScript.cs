@@ -6,40 +6,34 @@ using UnityEngine.UI;
 
 public class ElevatorButtonScript : MonoBehaviour 
 {
-    [SerializeField]
-    private Sprite button_pushed;
-    [SerializeField]
-    private Sprite button_neutral;
-    [SerializeField]
-    private Sprite button_floor;
+    [SerializeField] private Sprite button_pushed;
+    [SerializeField] private Sprite button_neutral;
 
-    [SerializeField]
-    private GameObject andar;
+    [SerializeField] private GameObject andar;
 
     private Image button_image;
-    private Image floor_image;
     private MonsterManager monster_manager;
 
-    public Cronometro cronometro; // Referencia ao script do cronometro
+    public Cronometro cronometro; // Referência ao script do cronômetro
     public GameObject background_floor;
     public GameObject monster_manager_object; // Referência ao objeto que possui MonsterManager
-    public int floor; // adicione uma variável para o andar correspondente ao botão
+    public DoorController doorController; // Referência ao DoorController
+    public int floor; // Número do andar correspondente ao botão
     private bool isPressed; 
     public bool canPress = true;
 
-    void Awake() //inicializa as referências a componentes que nao dependem de outros objetos
+    void Awake() 
     {
-        // Inicialize cronometro se necessário
         if (cronometro == null)
         {
             cronometro = FindObjectOfType<Cronometro>();
         }
+
         // Pega o número do andar atual correto a partir do número escrito no botão
         floor = int.Parse(transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text);
 
         button_image = GetComponent<Image>();
-        floor_image = background_floor.GetComponent<Image>();
-        monster_manager = monster_manager_object.GetComponent<MonsterManager>(); // inicializa a referencia ao Monstro
+        monster_manager = monster_manager_object.GetComponent<MonsterManager>(); // Inicializa a referência ao MonsterManager
     }
 
     // Start is called before the first frame update
@@ -52,20 +46,30 @@ public class ElevatorButtonScript : MonoBehaviour
     {
         if (isPressed)
         {
-            Debug.Log("Calma ai rapaz");
+            Debug.Log("Botão já pressionado.");
             return;
         }
-
         else
         {
             if (monster_manager.hold() == 1 && canPress)
             {
                 SetButtonPressed();
                 StartCoroutine(releaseButton());
-                Debug.Log($"Notificando o MonsterManager sobre o andar pressionado: {floor}");
-                monster_manager.OnButtonPress(floor, andar); // notifique o Monstro sobre o andar pressionado
 
-                // Iniciar cronômetro quando o botão de um andar diferente do andar inicial for pressionado
+                Debug.Log($"Notificando o MonsterManager sobre o andar pressionado: {floor}");
+                monster_manager.OnButtonPress(floor, andar); // Notifica o MonsterManager sobre o andar pressionado
+
+                // Chama o DoorController para iniciar o movimento do elevador com a animação das portas
+                if (doorController != null)
+                {
+                    doorController.MoveElevator(floor, andar);
+                }
+                else
+                {
+                    Debug.LogWarning("DoorController não está atribuído!");
+                }
+
+                // Inicia o cronômetro quando o botão de um andar diferente do andar inicial é pressionado
                 if (floor != 1)
                 {
                     cronometro.ElevadorSaiuDoAndarInicial();
@@ -78,8 +82,7 @@ public class ElevatorButtonScript : MonoBehaviour
     {
         isPressed = true;
         button_image.sprite = button_pushed;
-        // floor_image.sprite = button_floor;
-        Debug.Log("botao pressionado");
+        Debug.Log("Botão pressionado.");
     }
 
     IEnumerator releaseButton()
@@ -89,7 +92,7 @@ public class ElevatorButtonScript : MonoBehaviour
         Debug.Log("Executando ResetButton");
         ResetButton();
         monster_manager.release();
-        Debug.Log("Ja pode pressionar");
+        Debug.Log("Botão liberado.");
     }
 
     private void ResetButton()

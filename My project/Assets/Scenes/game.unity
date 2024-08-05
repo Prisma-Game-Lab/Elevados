@@ -618,9 +618,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: c3b6c4fae2ea7a94f897e30b673fd7c8, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.604
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -718,8 +718,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicas: []
   efeitosSonoros: []
-  musicSource: {fileID: 0}
-  SFXSource: {fileID: 0}
+  MusicSource: {fileID: 0}
+  SfxSource: {fileID: 0}
 --- !u!4 &355559950
 Transform:
   m_ObjectHideFlags: 0
@@ -770,7 +770,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   andarAtual: {fileID: 967956596}
-  monsterPrefab: {fileID: 4948845231422005302, guid: 398b9ecbd39bd8f4380d53e3b5d82049, type: 3}
+  monsterPrefabs:
+  - {fileID: 4948845231422005302, guid: 398b9ecbd39bd8f4380d53e3b5d82049, type: 3}
+  - {fileID: 2680128415628545447, guid: 86fda2cbd4d4437439cd69cfd559af50, type: 3}
+  - {fileID: 8309933869716633719, guid: cbdf378575c29fa41b12b173c925148a, type: 3}
+  - {fileID: 5691137212716884345, guid: 85caaf882fbb1174f852f6b05af609a9, type: 3}
   "bal\xE3o": {fileID: 1438021824}
   levels:
   - {fileID: 11400000, guid: f589db67a867762418d39ae9192a6de8, type: 2}
@@ -1528,6 +1532,7 @@ MonoBehaviour:
   doorAnimatorEsquerda: {fileID: 739409643}
   doorAnimatorDireita: {fileID: 1899973437}
   monsterManager: {fileID: 474242645}
+  floorBackgrounds: []
 --- !u!1 &627162736
 GameObject:
   m_ObjectHideFlags: 0
@@ -1714,6 +1719,7 @@ MonoBehaviour:
   doorAnimatorEsquerda: {fileID: 739409643}
   doorAnimatorDireita: {fileID: 1899973437}
   monsterManager: {fileID: 474242645}
+  floorBackgrounds: []
 --- !u!1001 &760686051
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2425,6 +2431,7 @@ MonoBehaviour:
   doorAnimatorEsquerda: {fileID: 739409643}
   doorAnimatorDireita: {fileID: 1899973437}
   monsterManager: {fileID: 474242645}
+  floorBackgrounds: []
 --- !u!224 &852636964 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1967229854189270633, guid: 81e704125ff0ec248bb1013849c29417, type: 3}
@@ -3958,6 +3965,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1049869885}
     - target: {fileID: 7530791861991224816, guid: 81e704125ff0ec248bb1013849c29417, type: 3}
+      propertyPath: doorController
+      value: 
+      objectReference: {fileID: 619651446}
+    - target: {fileID: 7530791861991224816, guid: 81e704125ff0ec248bb1013849c29417, type: 3}
       propertyPath: manager_object
       value: 
       objectReference: {fileID: 1049869885}
@@ -5174,6 +5185,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1049869885}
     - target: {fileID: 7530791861991224816, guid: 81e704125ff0ec248bb1013849c29417, type: 3}
+      propertyPath: doorController
+      value: 
+      objectReference: {fileID: 619651446}
+    - target: {fileID: 7530791861991224816, guid: 81e704125ff0ec248bb1013849c29417, type: 3}
       propertyPath: manager_object
       value: 
       objectReference: {fileID: 1049869885}
@@ -5529,6 +5544,10 @@ PrefabInstance:
       propertyPath: button_manager
       value: 
       objectReference: {fileID: 1049869885}
+    - target: {fileID: 7530791861991224816, guid: 81e704125ff0ec248bb1013849c29417, type: 3}
+      propertyPath: doorController
+      value: 
+      objectReference: {fileID: 619651446}
     - target: {fileID: 7530791861991224816, guid: 81e704125ff0ec248bb1013849c29417, type: 3}
       propertyPath: manager_object
       value: 
@@ -6055,6 +6074,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1049869885}
     - target: {fileID: 7530791861991224816, guid: 81e704125ff0ec248bb1013849c29417, type: 3}
+      propertyPath: doorController
+      value: 
+      objectReference: {fileID: 619651446}
+    - target: {fileID: 7530791861991224816, guid: 81e704125ff0ec248bb1013849c29417, type: 3}
       propertyPath: manager_object
       value: 
       objectReference: {fileID: 1049869885}
@@ -6207,6 +6230,7 @@ MonoBehaviour:
   doorAnimatorEsquerda: {fileID: 739409643}
   doorAnimatorDireita: {fileID: 1899973437}
   monsterManager: {fileID: 474242645}
+  floorBackgrounds: []
 --- !u!1001 &1971555123
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6392,6 +6416,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1049869885}
     - target: {fileID: 7530791861991224816, guid: 81e704125ff0ec248bb1013849c29417, type: 3}
+      propertyPath: doorController
+      value: 
+      objectReference: {fileID: 619651446}
+    - target: {fileID: 7530791861991224816, guid: 81e704125ff0ec248bb1013849c29417, type: 3}
       propertyPath: manager_object
       value: 
       objectReference: {fileID: 1049869885}
@@ -6508,6 +6536,7 @@ MonoBehaviour:
   doorAnimatorEsquerda: {fileID: 739409643}
   doorAnimatorDireita: {fileID: 1899973437}
   monsterManager: {fileID: 474242645}
+  floorBackgrounds: []
 --- !u!1 &2006564848
 GameObject:
   m_ObjectHideFlags: 0
@@ -6863,6 +6892,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.1256
       objectReference: {fileID: 0}
+    - target: {fileID: 7417358366279161402, guid: 9866b201027050a4093c158399ce19b3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 7681304481485817667, guid: 9866b201027050a4093c158399ce19b3, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -7122,6 +7155,10 @@ PrefabInstance:
       propertyPath: button_manager
       value: 
       objectReference: {fileID: 1049869890}
+    - target: {fileID: 7530791861991224816, guid: 81e704125ff0ec248bb1013849c29417, type: 3}
+      propertyPath: doorController
+      value: 
+      objectReference: {fileID: 619651446}
     - target: {fileID: 7530791861991224816, guid: 81e704125ff0ec248bb1013849c29417, type: 3}
       propertyPath: manager_object
       value: 

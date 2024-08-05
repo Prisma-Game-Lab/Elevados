@@ -13,7 +13,7 @@ public class MonsterManager : MonoBehaviour
 
     [SerializeField] private GameObject andarAtual;
 
-    [SerializeField] private GameObject monsterPrefab;
+    [SerializeField] private GameObject[] monsterPrefabs; // Array de prefabs de monstros
     [SerializeField] private GameObject balão;
     [SerializeField] private Level[] levels;
 
@@ -27,15 +27,11 @@ public class MonsterManager : MonoBehaviour
 
     void Start()
     {
-        buttonsReleased = 0;
         current_level = 0;
-
         floors = new List<GameObject>[maxFloor];
-        current_floor = 0;
-
         elevator = new List<GameObject>();
 
-        for(int i = 0; i < maxFloor; i++)
+        for (int i = 0; i < maxFloor; i++)
         {
             floors[i] = new List<GameObject>();
         }
@@ -47,6 +43,8 @@ public class MonsterManager : MonoBehaviour
     {
         for (int i = 0; i < levels[current_level].qtd_monsters; i++)
         {
+            // Sorteia aleatoriamente o tipo de monstro a ser gerado
+            GameObject monsterPrefab = monsterPrefabs[Random.Range(0, monsterPrefabs.Length)];
             GameObject monster = Instantiate(monsterPrefab, new Vector3(-5f, 0, 0), Quaternion.identity, transform);
 
             int current_floor = Random.Range(1, maxFloor);
@@ -57,47 +55,40 @@ public class MonsterManager : MonoBehaviour
                 targetFloor = Random.Range(1, maxFloor);
             }
 
-            monster.GetComponent<Monster>().Initiate(current_floor, targetFloor);
+            monster.GetComponent<Monster>().Initiate(current_floor, targetFloor, this);
 
             floors[current_floor].Add(monster);
-
             monster.SetActive(false);
-
         }
     }
 
     public void OnButtonPress(int floor, GameObject novo)
     {
-        //andarAtual.SetActive(false);
         novo.SetActive(true);
-        andarAtual = novo;
-        current_floor = floor;
-        //TO DO: MUDAR TAMBEM O SPRITE DO ANDAR
 
-        // Ativar monstros no andar pressionado
         ActivateMonstersOnFloor(floor);
 
-        // Verificar se algum monstro deseja ir para o andar pressionado
+        List<GameObject> monstersToRemove = new List<GameObject>();
+
         foreach (GameObject monsterObject in elevator)
         {
             Monster monster = monsterObject.GetComponent<Monster>();
 
-            if(monster.targetFloor == current_floor)
+            if(monster.targetFloor == floor)
             {
                 Debug.Log($"Monstro {monster.name} desativado ao chegar no andar {floor}");
                 
-                elevator.Remove(monsterObject);
+                monstersToRemove.Add(monsterObject);
                 Destroy(monsterObject);
             }
         }
-        // Adicionar pontos baseados no peso do monstro (POSSIVEL PARTE DO SCRIPT para
-        // FAZER FUNCIONAR A PONTUAÇAO DO JOGO, CHECAR ENTRE OS PROGS)
-        // MonsterWeight weight = monster.GetComponent<MonsterWeight>();
-        // if (weight != null)
-        // {
-        //     int points = weight.GetWeightPoints();
-        //     ScoreManager.instance.AddScore(points);
-        // }
+
+        foreach (GameObject monsterToRemove in monstersToRemove)
+        {
+            elevator.Remove(monsterToRemove);
+        }
+
+        UpdateBalloon();
     }
 
     // IEnumerator MonsterLoop()
@@ -131,57 +122,66 @@ public class MonsterManager : MonoBehaviour
     //     }
     // }
 
-    // public void OnButtonPress(int floor)
-    // {
-    //     if (currentMonsterIndex < monsters.Length)
-    //     {
-    //         GameObject currentMonster = monsters[currentMonsterIndex];
-    //         currentMonster.SetActive(false); // Desativa o monstro atual
-    //         currentMonsterIndex++;
-
-    //         if (currentMonsterIndex >= monsters.Length)
-    //         {
-    //             currentMonsterIndex = 0; // Reseta o índice se todos os monstros já foram ativados
-    //         }
-
-    //         GameObject nextMonster = monsters[currentMonsterIndex];
-    //         StartCoroutine(ActivateNextMonster(nextMonster, 2f)); // Ativa o próximo monstro após 2 segundos
-    //     }
-    
-    //     if (isProcessing && floor == requestedFloor)
-    //     {
-    //         GameObject currentMonster = monsters[currentMonsterIndex];
-    //         currentMonster.SetActive(false);
-    //         isProcessing = false;
-    //         Debug.Log("Monstro " + currentMonster.name + " saiu no andar " + floor);
-    //     }
-    // }
-
-    public IEnumerator MoveMonster(Monster monster)
+    public void AddToElevator(GameObject monster)
     {
-        // Somente mover o monstro se ele estiver ativo e se o andar atual for diferente do andar desejado
-        if (monster.gameObject.activeSelf && monster.currentFloor != monster.targetFloor)
+        elevator.Add(monster);
+        UpdateBalloon();
+    }
+    
+    public void RemoveFromElevator(GameObject monster)
+    {
+        elevator.Remove(monster);
+        UpdateBalloon();
+    }
+    
+    void UpdateBalloon()
+    {
+        if (elevator.Count > 0)
         {
-            yield return new WaitForSeconds(2); // Simula o tempo de espera para o monstro entrar no elevador
-            monster.MoveToTargetFloor(); // Iniciar a movimentação do monstro
-            Debug.Log($"Monstro {monster.name} está se movendo para o andar {monster.targetFloor}");
+            balão.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = elevator[0].GetComponent<Monster>().targetFloor.ToString();
+            balão.SetActive(true);
+        }
+        else
+        {
+            balão.SetActive(false);
         }
     }
-
+    
     public void ActivateMonstersOnFloor(int floor)
     {
-        // Ativar monstros no andar especificado
-        foreach (GameObject monsterObject in floors[current_floor])
+        foreach (GameObject monsterObject in floors[floor])
         {
             monsterObject.SetActive(true);
             Debug.Log($"Monstro ativado no andar {floor}");
-            balão.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = monsterObject.GetComponent<Monster>().targetFloor.ToString();
-            balão.SetActive(true);
-
-            //TO DO: LEVAR EM CONTA PESO DO MONSTRO E VER QUAL MONSTRO NA FILA PODE ENTRAR
-            //O PRIMEIRO E SEMPRE O QUE ENTRA E SE ELE PASSAR O PESO O ELEVADOR FICA PESADO E N ENTRA MAIS NINGUEM
+            AddToElevator(monsterObject);
         }
     }
+
+    public IEnumerator RespawnMonster(GameObject monsterPrefab, int respawnFloor)
+    {
+        yield return new WaitForSeconds(6); // Tempo de respawn de 6 segundos
+
+        GameObject monster = Instantiate(monsterPrefab, new Vector3(-5f, 0, 0), Quaternion.identity, transform);
+        monster.GetComponent<Monster>().Initiate(respawnFloor, Random.Range(1, maxFloor), this);
+
+        floors[respawnFloor].Add(monster);
+        monster.SetActive(false);
+    }
+
+    // public void ActivateMonstersOnFloor(int floor)
+    // {
+    //     // Ativar monstros no andar especificado
+    //     foreach (GameObject monsterObject in floors[current_floor])
+    //     {
+    //         monsterObject.SetActive(true);
+    //         Debug.Log($"Monstro ativado no andar {floor}");
+    //         balão.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = monsterObject.GetComponent<Monster>().targetFloor.ToString();
+    //         balão.SetActive(true);
+
+    //         //TO DO: LEVAR EM CONTA PESO DO MONSTRO E VER QUAL MONSTRO NA FILA PODE ENTRAR
+    //         //O PRIMEIRO E SEMPRE O QUE ENTRA E SE ELE PASSAR O PESO O ELEVADOR FICA PESADO E N ENTRA MAIS NINGUEM
+    //     }
+    // }
 
     public int hold()
     {

@@ -1,19 +1,17 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
     public int currentFloor { get; private set; }
     public int targetFloor { get; private set; }
+    private MonsterManager manager;
 
-    public int monster_type;
-    public int weight;
-
-    public void Initiate(int currentFloor, int targetFloor)
+    public void Initiate(int currentFloor, int targetFloor, MonsterManager manager)
     {
         this.currentFloor = currentFloor;
         this.targetFloor = targetFloor;
+        this.manager = manager;
         Debug.Log($"Monstro criado no andar {currentFloor} e deseja ir para o andar {targetFloor}");
     }
 
@@ -27,18 +25,15 @@ public class Monster : MonoBehaviour
 
     private IEnumerator MoveAndCheckArrival()
     {
-        // Simular o tempo de viagem do elevador para o andar desejado
         yield return new WaitForSeconds(2); 
 
-        // Atualizar a posição do monstro para o andar desejado
         currentFloor = targetFloor;
 
         if (currentFloor == targetFloor)
         {
             Debug.Log($"Monstro desativado ao chegar no andar {currentFloor}");
-            // Desativar o monstro ao chegar no andar desejado
+            manager.RemoveFromElevator(gameObject);
             Destroy(gameObject);
-
         }
     }
 }
