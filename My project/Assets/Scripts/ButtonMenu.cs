@@ -13,12 +13,12 @@ public class ButtonMenu : MonoBehaviour
     }
 
     // Carrega a cena anterior e reinicia a música
-    public void LoadPreviousScene(string cena, string musica)
+    public void LoadPreviousScene(string cena, int musicaIndex)
     {
         // Toca o som de clique do botao
         PlayButtonClickSound();
 
-        AudioManager.instance.ReiniciaMusica(musica);
+        AudioManager.instance.ReiniciaMusica(musicaIndex);
         SceneManager.LoadScene(cena);
     }
 

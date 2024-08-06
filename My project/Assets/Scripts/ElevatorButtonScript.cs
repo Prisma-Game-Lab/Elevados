@@ -11,6 +11,7 @@ public class ElevatorButtonScript : MonoBehaviour
 
     [SerializeField] private GameObject andar;
 
+    private AudioManager audioManager;
     private Image button_image;
     private MonsterManager monster_manager;
 
@@ -34,6 +35,14 @@ public class ElevatorButtonScript : MonoBehaviour
 
         button_image = GetComponent<Image>();
         monster_manager = monster_manager_object.GetComponent<MonsterManager>(); // Inicializa a referência ao MonsterManager
+
+        // Inicializa a referência ao AudioManager
+        audioManager = AudioManager.instance;
+
+        if (audioManager == null)
+        {
+            Debug.LogError("AudioManager instance is null! Ensure AudioManager is properly initialized.");
+        }
     }
 
     // Start is called before the first frame update
@@ -53,6 +62,12 @@ public class ElevatorButtonScript : MonoBehaviour
         {
             if (monster_manager.hold() == 1 && canPress)
             {
+                // Toca o som de clique do botão, se possível
+                if (audioManager != null)
+                {
+                    audioManager.PlayButtonClickSFX();
+                }
+                
                 SetButtonPressed();
                 StartCoroutine(releaseButton());
 
