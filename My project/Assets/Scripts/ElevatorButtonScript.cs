@@ -84,7 +84,7 @@ public class ElevatorButtonScript : MonoBehaviour
             doorController.MoveElevator(floor, andar);
 
             // Espera a animação de movimentação do elevador e troca do fundo do andar
-            yield return new WaitForSeconds(6); // Ajuste o tempo de acordo com a duração das animações
+            yield return new WaitForSeconds(7); // Ajuste o tempo de acordo com a duração das animações
         }
 
         // Notifica o MonsterManager após a animação do elevador
