@@ -8,14 +8,31 @@ public class ButtonManager : MonoBehaviour
     //1 se algum botao estiver apertado
     private int buttonsReleased;
 
+    // Referência ao AudioManager
+    private AudioManager audioManager;
+
     // Start is called before the first frame update
     void Start()
     {
         buttonsReleased = 0;
+
+        // Inicializa a referência ao AudioManager
+        audioManager = AudioManager.instance;
+
+        if (audioManager == null)
+        {
+            Debug.LogError("AudioManager instance is null! Ensure AudioManager is properly initialized.");
+        }
     }
 
     public int hold()
     {
+        // Toca o som de clique do botão, se possível
+        if (audioManager != null)
+        {
+            audioManager.PlayButtonClickSFX();
+        }
+        
         //Retorna 1 se for possivel apertar o botao
         if (buttonsReleased == 0)
         {

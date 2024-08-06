@@ -3,55 +3,48 @@ using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
 {
-    [SerializeField]
-    private Slider musicSlider;
-    [SerializeField]
-    private Slider sfxSlider;
+    public Slider musicSlider;
+    public Slider sfxSlider;
 
-    void Start()
+    private void Start()
     {
-        if (AudioManager.instance == null)
-        {
-            AudioManager.instance = FindObjectOfType<AudioManager>();
-
-            if (AudioManager.instance == null)
-            {
-                Debug.LogError("AudioManager não foi encontrado na cena.");
-                return;
-            }
-        }
-
-        // Definir os sliders para os volumes atuais
-        if (AudioManager.instance.MusicSource != null)
-        {
-            musicSlider.value = AudioManager.instance.MusicSource.volume;
-        }
-        else
-        {
-            Debug.LogWarning("MusicSource não está atribuído no AudioManager.");
-        }
-
-        if (AudioManager.instance.SfxSource != null)
-        {
-            sfxSlider.value = AudioManager.instance.SfxSource.volume;
-        }
-        else
-        {
-            Debug.LogWarning("SfxSource não está atribuído no AudioManager.");
-        }
-
-        // Adicionar listeners aos sliders
+        // Atribuir as funções de callback para os sliders
         musicSlider.onValueChanged.AddListener(SetMusicVolume);
         sfxSlider.onValueChanged.AddListener(SetSFXVolume);
+
+        // Definir os sliders para refletir os volumes salvos
+        if (AudioManager.instance != null)
+        {
+            musicSlider.value = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
+            sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume", 0.5f);
+        }
+        else
+        {
+            Debug.LogError("AudioManager instance is null! Ensure AudioManager is properly initialized.");
+        }
     }
 
-    public void SetMusicVolume(float volume)
+    private void SetMusicVolume(float volume)
     {
-        AudioManager.instance.SetMusicVolume(volume);
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.SetMusicVolume(volume);
+        }
+        else
+        {
+            Debug.LogError("AudioManager instance is null! Ensure AudioManager is properly initialized.");
+        }
     }
 
-    public void SetSFXVolume(float volume)
+    private void SetSFXVolume(float volume)
     {
-        AudioManager.instance.SetSFXVolume(volume);
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.SetSFXVolume(volume);
+        }
+        else
+        {
+            Debug.LogError("AudioManager instance is null! Ensure AudioManager is properly initialized.");
+        }
     }
 }

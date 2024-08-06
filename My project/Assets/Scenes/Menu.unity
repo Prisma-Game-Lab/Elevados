@@ -2175,10 +2175,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d0870ac00af6cd0d9c8afe4b8c361d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicas: []
-  efeitosSonoros: []
-  MusicSource: {fileID: 423107174}
-  SfxSource: {fileID: 444424495}
+  musicSource: {fileID: 423107174}
+  sfxSource: {fileID: 444424495}
+  buttonClickSFX: {fileID: 8300000, guid: 78b9bc2c827b0ae4bac81306d01bc5bc, type: 3}
 --- !u!4 &1724811574
 Transform:
   m_ObjectHideFlags: 0

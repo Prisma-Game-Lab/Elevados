@@ -5,78 +5,79 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
 
-    [SerializeField]
-    public AudioClip[] musicas, efeitosSonoros; // Arrays para armazenar as músicas e os efeitos sonoros
+    public AudioSource musicSource;
+    public AudioSource sfxSource;
 
-    [SerializeField]
-    public AudioSource MusicSource, SfxSource; // AudioSources para tocar música e efeitos sonoros
+    // Efeito sonoro que será tocado ao pressionar botões
+    public AudioClip buttonClickSFX;
 
-    // void Awake()
-    // {
-    //     // Singleton pattern
-    //     if (instance == null)
-    //     {
-    //         instance = this;
-    //         DontDestroyOnLoad(gameObject);
-    //     }
-    //     else
-    //     {
-    //         Destroy(gameObject);
-    //     }
-    // }
-
-    // Toca uma música pelo nome
-    public void TocaMusica(string nomeMusica)
+    void Awake()
     {
-        // Verifica se a música atual já é a que está tocando
-        if (MusicSource.clip != null && MusicSource.clip.name == nomeMusica && MusicSource.isPlaying)
+        // Garantir que só exista um AudioManager (Singleton)
+        if (instance == null)
         {
-            ReiniciaMusica(nomeMusica);
+            instance = this;
+            DontDestroyOnLoad(gameObject); // Persistir apenas o AudioManager entre as cenas
         }
-
-        AudioClip musica = Array.Find(musicas, x => x.name == nomeMusica);
-
-        if (musica == null)
+        else
         {
-            Debug.Log("Música não encontrada");
+            Destroy(gameObject); // Destruir a nova instância se já existir uma instância ativa
             return;
         }
 
-        MusicSource.clip = musica;
-        MusicSource.Play();
+        // Carregar os volumes salvos (ou definir padrão se não houver nada salvo)
+        musicSource.volume = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
+        sfxSource.volume = PlayerPrefs.GetFloat("SFXVolume", 0.5f);
     }
 
-    // Toca um efeito sonoro pelo nome
-    public void TocaEfeitoSonoro(string nomeEfeito)
+    // Método para tocar o som de clique do botão
+    public void PlayButtonClickSFX()
     {
-        AudioClip efeito = Array.Find(efeitosSonoros, x => x.name == nomeEfeito);
-
-        if (efeito == null)
+        if (buttonClickSFX != null)
         {
-            Debug.Log("Efeito sonoro não encontrado");
-            return;
+            sfxSource.PlayOneShot(buttonClickSFX);
         }
-
-        SfxSource.clip = efeito;
-        SfxSource.Play();
+        else
+        {
+            Debug.LogWarning("No button click SFX assigned in AudioManager.");
+        }
     }
 
     public void ReiniciaMusica(string nomeMusica)
     {
-        // Para a música atual
-        MusicSource.Stop();
+        // Verifica se a música atual é a mesma que está pedindo para tocar
+        if (musicSource.clip != null && musicSource.clip.name == nomeMusica)
+        {
+            // Se já estiver tocando a música correta, não faça nada
+            if (musicSource.isPlaying)
+            {
+                return;
+            }
+        }
 
-        // Inicia a música novamente
-        TocaMusica(nomeMusica);
+        // Carregar a nova música
+        AudioClip novaMusica = Resources.Load<AudioClip>(nomeMusica);
+        if (novaMusica != null)
+        {
+            // Atribuir a nova música e tocar
+            musicSource.clip = novaMusica;
+            musicSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning($"Música '{nomeMusica}' não encontrada nos recursos.");
+        }
     }
 
     public void SetMusicVolume(float volume)
     {
-        MusicSource.volume = volume;
+        musicSource.volume = volume;
+        PlayerPrefs.SetFloat("MusicVolume", volume); // Salvar o volume
     }
 
     public void SetSFXVolume(float volume)
     {
-        SfxSource.volume = volume;
+        sfxSource.volume = volume;
+        PlayerPrefs.SetFloat("SFXVolume", volume); // Salvar o volume
     }
 }
