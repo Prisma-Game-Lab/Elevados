@@ -62,10 +62,8 @@ public class MonsterManager : MonoBehaviour
         }
     }
 
-    public void OnButtonPress(int floor, GameObject novo)
+    public void OnElevatorArrived(int floor)
     {
-        novo.SetActive(true);
-
         ActivateMonstersOnFloor(floor);
 
         List<GameObject> monstersToRemove = new List<GameObject>();
@@ -74,7 +72,7 @@ public class MonsterManager : MonoBehaviour
         {
             Monster monster = monsterObject.GetComponent<Monster>();
 
-            if(monster.targetFloor == floor)
+            if (monster.targetFloor == floor)
             {
                 Debug.Log($"Monstro {monster.name} desativado ao chegar no andar {floor}");
                 
@@ -91,35 +89,33 @@ public class MonsterManager : MonoBehaviour
         UpdateBalloon();
     }
 
-    // IEnumerator MonsterLoop()
+    // public void OnButtonPress(int floor, GameObject novo)
     // {
-    //     while (true)
+    //     novo.SetActive(true);
+
+    //     ActivateMonstersOnFloor(floor);
+
+    //     List<GameObject> monstersToRemove = new List<GameObject>();
+
+    //     foreach (GameObject monsterObject in elevator)
     //     {
-    //         if (!isProcessing)
+    //         Monster monster = monsterObject.GetComponent<Monster>();
+
+    //         if(monster.targetFloor == floor)
     //         {
-    //             isProcessing = true;
-
-    //             if (currentMonsterIndex >= monsters.Length)
-    //             {
-    //                 currentMonsterIndex = 0;
-    //             }
-
-    //             GameObject currentMonster = monsters[currentMonsterIndex];
-    //             currentMonster.SetActive(true);
-
-    //             requestedFloor = Random.Range(1, maxFloor + 1);
-    //             Debug.Log("Monstro " + currentMonster.name + " quer ir para o andar " + requestedFloor);
-
-    //             while (isProcessing)
-    //             {
-    //                 yield return null;
-    //             }
-
-    //             currentMonsterIndex = (currentMonsterIndex + 1) % monsters.Length;
+    //             Debug.Log($"Monstro {monster.name} desativado ao chegar no andar {floor}");
+                
+    //             monstersToRemove.Add(monsterObject);
+    //             Destroy(monsterObject);
     //         }
-
-    //         yield return null;
     //     }
+
+    //     foreach (GameObject monsterToRemove in monstersToRemove)
+    //     {
+    //         elevator.Remove(monsterToRemove);
+    //     }
+
+    //     UpdateBalloon();
     // }
 
     public void AddToElevator(GameObject monster)

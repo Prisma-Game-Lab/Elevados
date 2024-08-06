@@ -71,25 +71,29 @@ public class ElevatorButtonScript : MonoBehaviour
                 SetButtonPressed();
                 StartCoroutine(releaseButton());
 
-                Debug.Log($"Notificando o MonsterManager sobre o andar pressionado: {floor}");
-                monster_manager.OnButtonPress(floor, andar); // Notifica o MonsterManager sobre o andar pressionado
-
-                // Chama o DoorController para iniciar o movimento do elevador com a animação das portas
-                if (doorController != null)
-                {
-                    doorController.MoveElevator(floor, andar);
-                }
-                else
-                {
-                    Debug.LogWarning("DoorController não está atribuído!");
-                }
-
-                // Inicia o cronômetro quando o botão de um andar diferente do andar inicial é pressionado
-                if (floor != 1)
-                {
-                    cronometro.ElevadorSaiuDoAndarInicial();
-                }
+                StartCoroutine(HandleElevatorMovement());
             }
+        }
+    }
+
+    private IEnumerator HandleElevatorMovement()
+    {
+        if (doorController != null)
+        {
+            // Chama o DoorController para iniciar o movimento do elevador com a animação das portas
+            doorController.MoveElevator(floor, andar);
+
+            // Espera a animação de movimentação do elevador e troca do fundo do andar
+            yield return new WaitForSeconds(6); // Ajuste o tempo de acordo com a duração das animações
+        }
+
+        // Notifica o MonsterManager após a animação do elevador
+        monster_manager.OnElevatorArrived(floor);
+
+        // Inicia o cronômetro quando o botão de um andar diferente do andar inicial é pressionado
+        if (floor != 1)
+        {
+            cronometro.ElevadorSaiuDoAndarInicial();
         }
     }
 

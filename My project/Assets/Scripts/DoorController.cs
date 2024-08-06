@@ -35,11 +35,11 @@ public class DoorController : MonoBehaviour
         // Fechar a porta antes de mover
         doorAnimatorEsquerda.SetTrigger("Fechar");
         doorAnimatorDireita.SetTrigger("Fechar");
-        yield return new WaitForSeconds(2); // Tempo da animação de fechar a porta
+        yield return new WaitForSeconds(3); // Tempo da animação de fechar a porta
 
         // Simula a movimentação do elevador
         Debug.Log($"Movendo para o andar {targetFloor}");
-        yield return new WaitForSeconds(2); // Tempo de movimentação do elevador
+        yield return new WaitForSeconds(3); // Tempo de movimentação do elevador
 
         // Atualize o andar atual
         currentFloor = targetFloor;
@@ -50,10 +50,10 @@ public class DoorController : MonoBehaviour
         // Abrir a porta ao chegar no andar
         doorAnimatorEsquerda.SetTrigger("Abrir");
         doorAnimatorDireita.SetTrigger("Abrir");
-        yield return new WaitForSeconds(2); // Tempo da animação de abrir a porta
+        yield return new WaitForSeconds(3); // Tempo da animação de abrir a porta
 
         // Notifique o MonsterManager sobre o andar que foi alcançado
-        monsterManager.OnButtonPress(targetFloor, novo);
+        monsterManager.OnElevatorArrived(currentFloor);
 
         isMoving = false;
     }
