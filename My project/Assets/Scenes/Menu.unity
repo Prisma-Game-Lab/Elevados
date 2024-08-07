@@ -915,6 +915,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 854208304}
   m_CullTransparentMesh: 1
+--- !u!1 &880021687
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 880021689}
+  - component: {fileID: 880021688}
+  m_Layer: 0
+  m_Name: Gerenciador_cenas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &880021688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880021687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 384c39f44280e424eb27a4ebdde200f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &880021689
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880021687}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1051.1154, y: 543.3061, z: 5.034157}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &921313398
 GameObject:
   m_ObjectHideFlags: 0
@@ -1183,7 +1227,7 @@ GameObject:
   - component: {fileID: 1122747897}
   - component: {fileID: 1122747896}
   - component: {fileID: 1122747895}
-  - component: {fileID: 1122747894}
+  - component: {fileID: 1122747898}
   m_Layer: 5
   m_Name: Quit (1)
   m_TagString: Untagged
@@ -1212,18 +1256,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1122747894
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1122747892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8500f1eb71564b0d6baf13f140c16bc1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1122747895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1268,16 +1300,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1122747894}
-        m_TargetAssemblyTypeName: ButtonQuit, Assembly-CSharp
-        m_MethodName: Quit
-        m_Mode: 1
+      - m_Target: {fileID: 1122747898}
+        m_TargetAssemblyTypeName: ButtonMenu, Assembly-CSharp
+        m_MethodName: TrocaCena
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Quit
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1122747896
@@ -1318,6 +1350,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1122747892}
   m_CullTransparentMesh: 1
+--- !u!114 &1122747898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1122747892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7c99601b812e852bdfb956630461e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1175265634
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2948,3 +2992,4 @@ SceneRoots:
   - {fileID: 1298417131}
   - {fileID: 1246895121}
   - {fileID: 1724811574}
+  - {fileID: 880021689}
