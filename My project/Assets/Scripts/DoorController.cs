@@ -40,6 +40,7 @@ public class DoorController : MonoBehaviour
         // Fechar a porta antes de mover
         doorAnimatorEsquerda.SetTrigger("Fechar");
         doorAnimatorDireita.SetTrigger("Fechar");
+        AudioManager.instance.PlayDoorSFX(); // Toca o som da porta fechando
         yield return new WaitForSeconds(3); // Tempo da animação de fechar a porta
 
         // Simula a movimentação do elevador
@@ -55,8 +56,8 @@ public class DoorController : MonoBehaviour
         // Abrir a porta ao chegar no andar
         doorAnimatorEsquerda.SetTrigger("Abrir");
         doorAnimatorDireita.SetTrigger("Abrir");
-        yield return new WaitForSeconds(3); // Tempo da animação de abrir a porta
-
+        AudioManager.instance.PlayDoorSFX(); // Toca o som da porta abrindo
+        yield return new WaitForSeconds(2);
         // Notifique o MonsterManager sobre o andar que foi alcançado
         monsterManager.OnElevatorArrived(currentFloor);
 

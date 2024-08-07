@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
+    [Header("Door SFX")] public AudioClip doorSFX;
     public static AudioManager instance;
 
     public AudioSource musicSource;
@@ -56,6 +57,18 @@ public class AudioManager : MonoBehaviour
     {
         // Checa e toca a música correta sempre que uma nova cena é carregada
         CheckAndPlaySceneMusic();
+    }
+    
+    public void PlayDoorSFX()
+    {
+        if (doorSFX != null)
+        {
+            sfxSource.PlayOneShot(doorSFX);
+        }
+        else
+        {
+            Debug.LogWarning("No door SFX assigned in AudioManager.");
+        }
     }
 
     private void CheckAndPlaySceneMusic()
