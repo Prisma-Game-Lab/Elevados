@@ -18,7 +18,7 @@ public class MonsterManager : MonoBehaviour
     [SerializeField] private Level[] levels;
 
     private List<GameObject> elevator; // Lista de monstros na cena
-    [SerializeField] private int maxFloor = 6;
+    [SerializeField] private int maxFloor = 7;
 
     private List<GameObject>[] floors;
     private int current_floor;
@@ -47,12 +47,12 @@ public class MonsterManager : MonoBehaviour
             GameObject monsterPrefab = monsterPrefabs[Random.Range(0, monsterPrefabs.Length)];
             GameObject monster = Instantiate(monsterPrefab, new Vector3(-5f, 0, 0), Quaternion.identity, transform);
 
-            int current_floor = Random.Range(1, maxFloor);
-            int targetFloor = Random.Range(1, maxFloor);
+            int current_floor = Random.Range(1, maxFloor-1);
+            int targetFloor = Random.Range(1, maxFloor-1);
 
             while (targetFloor == current_floor)
             {
-                targetFloor = Random.Range(1, maxFloor);
+                targetFloor = Random.Range(1, maxFloor-1);
             }
 
             monster.GetComponent<Monster>().Initiate(current_floor, targetFloor, this);

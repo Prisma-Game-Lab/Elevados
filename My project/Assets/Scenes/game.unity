@@ -1388,12 +1388,12 @@ MonoBehaviour:
   doorAnimatorDireita: {fileID: 1899973437}
   monsterManager: {fileID: 474242645}
   floorBackgrounds:
-  - {fileID: 1135777863}
   - {fileID: 336834314}
   - {fileID: 1084492308}
   - {fileID: 1858580299}
   - {fileID: 962622068}
   - {fileID: 805499309}
+  - {fileID: 1343666451}
 --- !u!1 &627162736
 GameObject:
   m_ObjectHideFlags: 0
@@ -3836,7 +3836,7 @@ PrefabInstance:
     - target: {fileID: 7530791861991224816, guid: 81e704125ff0ec248bb1013849c29417, type: 3}
       propertyPath: background_floor
       value: 
-      objectReference: {fileID: 1084492308}
+      objectReference: {fileID: 967956596}
     - target: {fileID: 7530791861991224816, guid: 81e704125ff0ec248bb1013849c29417, type: 3}
       propertyPath: door_controller_object
       value: 
@@ -5056,7 +5056,7 @@ PrefabInstance:
     - target: {fileID: 7530791861991224816, guid: 81e704125ff0ec248bb1013849c29417, type: 3}
       propertyPath: background_floor
       value: 
-      objectReference: {fileID: 962622068}
+      objectReference: {fileID: 967956596}
     - target: {fileID: 7530791861991224816, guid: 81e704125ff0ec248bb1013849c29417, type: 3}
       propertyPath: door_controller_object
       value: 
@@ -5416,7 +5416,7 @@ PrefabInstance:
     - target: {fileID: 7530791861991224816, guid: 81e704125ff0ec248bb1013849c29417, type: 3}
       propertyPath: background_floor
       value: 
-      objectReference: {fileID: 336834314}
+      objectReference: {fileID: 967956596}
     - target: {fileID: 7530791861991224816, guid: 81e704125ff0ec248bb1013849c29417, type: 3}
       propertyPath: door_controller_object
       value: 
@@ -5945,7 +5945,7 @@ PrefabInstance:
     - target: {fileID: 7530791861991224816, guid: 81e704125ff0ec248bb1013849c29417, type: 3}
       propertyPath: background_floor
       value: 
-      objectReference: {fileID: 1858580299}
+      objectReference: {fileID: 967956596}
     - target: {fileID: 7530791861991224816, guid: 81e704125ff0ec248bb1013849c29417, type: 3}
       propertyPath: door_controller_object
       value: 
@@ -6287,7 +6287,7 @@ PrefabInstance:
     - target: {fileID: 7530791861991224816, guid: 81e704125ff0ec248bb1013849c29417, type: 3}
       propertyPath: background_floor
       value: 
-      objectReference: {fileID: 805499309}
+      objectReference: {fileID: 967956596}
     - target: {fileID: 7530791861991224816, guid: 81e704125ff0ec248bb1013849c29417, type: 3}
       propertyPath: door_controller_object
       value: 
@@ -6397,7 +6397,13 @@ MonoBehaviour:
   doorAnimatorEsquerda: {fileID: 739409643}
   doorAnimatorDireita: {fileID: 1899973437}
   monsterManager: {fileID: 474242645}
-  floorBackgrounds: []
+  floorBackgrounds:
+  - {fileID: 336834314}
+  - {fileID: 1084492308}
+  - {fileID: 1858580299}
+  - {fileID: 962622068}
+  - {fileID: 805499309}
+  - {fileID: 1343666451}
 --- !u!1 &2006564848
 GameObject:
   m_ObjectHideFlags: 0
@@ -7027,7 +7033,7 @@ PrefabInstance:
     - target: {fileID: 7530791861991224816, guid: 81e704125ff0ec248bb1013849c29417, type: 3}
       propertyPath: background_floor
       value: 
-      objectReference: {fileID: 1343666451}
+      objectReference: {fileID: 967956596}
     - target: {fileID: 7530791861991224816, guid: 81e704125ff0ec248bb1013849c29417, type: 3}
       propertyPath: door_controller_object
       value: 
