@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 502a44eb123c1784d9f0fa669422402b, type: 3}
   m_Name: Nivel_teste1
   m_EditorClassIdentifier: 
-  qtd_monsters: 4
+  qtd_monsters: 6
   total_time: 0

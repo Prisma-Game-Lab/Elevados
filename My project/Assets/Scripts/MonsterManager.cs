@@ -47,12 +47,12 @@ public class MonsterManager : MonoBehaviour
             GameObject monsterPrefab = monsterPrefabs[Random.Range(0, monsterPrefabs.Length)];
             GameObject monster = Instantiate(monsterPrefab, new Vector3(-5f, 0, 0), Quaternion.identity, transform);
 
-            int current_floor = Random.Range(1, maxFloor-1);
-            int targetFloor = Random.Range(1, maxFloor-1);
+            int current_floor = Random.Range(1, maxFloor);
+            int targetFloor = Random.Range(1, maxFloor);
 
             while (targetFloor == current_floor)
             {
-                targetFloor = Random.Range(1, maxFloor-1);
+                targetFloor = Random.Range(1, maxFloor);
             }
 
             monster.GetComponent<Monster>().Initiate(current_floor, targetFloor, this);
@@ -139,7 +139,7 @@ public class MonsterManager : MonoBehaviour
         yield return new WaitForSeconds(6); // Tempo de respawn de 6 segundos
 
         GameObject monster = Instantiate(monsterPrefab, new Vector3(-5f, 0, 0), Quaternion.identity, transform);
-        monster.GetComponent<Monster>().Initiate(respawnFloor, Random.Range(1, maxFloor-1), this);
+        monster.GetComponent<Monster>().Initiate(respawnFloor, Random.Range(1, maxFloor), this);
 
         floors[respawnFloor].Add(monster);
         monster.SetActive(false);
