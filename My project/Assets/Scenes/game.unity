@@ -630,10 +630,12 @@ MonoBehaviour:
   - {fileID: 2680128415628545447, guid: 86fda2cbd4d4437439cd69cfd559af50, type: 3}
   - {fileID: 8309933869716633719, guid: cbdf378575c29fa41b12b173c925148a, type: 3}
   - {fileID: 5691137212716884345, guid: 85caaf882fbb1174f852f6b05af609a9, type: 3}
+  - {fileID: 643538712144443634, guid: 868fb7d4237577d49bdd7f22c0677d66, type: 3}
+  - {fileID: 5631338372953099874, guid: dfc24044317806e418eaa5773c8818eb, type: 3}
   "bal\xE3o": {fileID: 1438021824}
   levels:
   - {fileID: 11400000, guid: f589db67a867762418d39ae9192a6de8, type: 2}
-  maxFloor: 6
+  maxFloor: 7
 --- !u!4 &474242646
 Transform:
   m_ObjectHideFlags: 0
@@ -6765,6 +6767,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7681304481485817667, guid: 9866b201027050a4093c158399ce19b3, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200788386681794820, guid: 9866b201027050a4093c158399ce19b3, type: 3}
+      propertyPath: m_LocalPosition.z
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8719561968055229490, guid: 9866b201027050a4093c158399ce19b3, type: 3}

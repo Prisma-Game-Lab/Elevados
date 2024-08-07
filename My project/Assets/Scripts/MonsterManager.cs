@@ -18,7 +18,7 @@ public class MonsterManager : MonoBehaviour
     [SerializeField] private Level[] levels;
 
     private List<GameObject> elevator; // Lista de monstros na cena
-    [SerializeField] private int maxFloor = 7;
+    [SerializeField] public int maxFloor = 7;
 
     private List<GameObject>[] floors;
     private int current_floor;
@@ -64,6 +64,7 @@ public class MonsterManager : MonoBehaviour
 
     public void OnElevatorArrived(int floor)
     {
+        Debug.Log($"Elevador chegou ao andar {floor}");
         ActivateMonstersOnFloor(floor);
 
         List<GameObject> monstersToRemove = new List<GameObject>();
@@ -88,35 +89,6 @@ public class MonsterManager : MonoBehaviour
 
         UpdateBalloon();
     }
-
-    // public void OnButtonPress(int floor, GameObject novo)
-    // {
-    //     novo.SetActive(true);
-
-    //     ActivateMonstersOnFloor(floor);
-
-    //     List<GameObject> monstersToRemove = new List<GameObject>();
-
-    //     foreach (GameObject monsterObject in elevator)
-    //     {
-    //         Monster monster = monsterObject.GetComponent<Monster>();
-
-    //         if(monster.targetFloor == floor)
-    //         {
-    //             Debug.Log($"Monstro {monster.name} desativado ao chegar no andar {floor}");
-                
-    //             monstersToRemove.Add(monsterObject);
-    //             Destroy(monsterObject);
-    //         }
-    //     }
-
-    //     foreach (GameObject monsterToRemove in monstersToRemove)
-    //     {
-    //         elevator.Remove(monsterToRemove);
-    //     }
-
-    //     UpdateBalloon();
-    // }
 
     public void AddToElevator(GameObject monster)
     {
@@ -145,11 +117,20 @@ public class MonsterManager : MonoBehaviour
     
     public void ActivateMonstersOnFloor(int floor)
     {
-        foreach (GameObject monsterObject in floors[floor])
+        if (floor > 0 && floor < floors.Length)
         {
-            monsterObject.SetActive(true);
-            Debug.Log($"Monstro ativado no andar {floor}");
-            AddToElevator(monsterObject);
+            foreach (GameObject monsterObject in floors[floor])
+            {
+                if (monsterObject != null)
+                {
+                    monsterObject.SetActive(true);
+                    AddToElevator(monsterObject);
+                }
+            }
+        }
+        else
+        {
+            Debug.LogError($"Floor index {floor} is out of bounds!");
         }
     }
 
@@ -158,26 +139,11 @@ public class MonsterManager : MonoBehaviour
         yield return new WaitForSeconds(6); // Tempo de respawn de 6 segundos
 
         GameObject monster = Instantiate(monsterPrefab, new Vector3(-5f, 0, 0), Quaternion.identity, transform);
-        monster.GetComponent<Monster>().Initiate(respawnFloor, Random.Range(1, maxFloor), this);
+        monster.GetComponent<Monster>().Initiate(respawnFloor, Random.Range(1, maxFloor-1), this);
 
         floors[respawnFloor].Add(monster);
         monster.SetActive(false);
     }
-
-    // public void ActivateMonstersOnFloor(int floor)
-    // {
-    //     // Ativar monstros no andar especificado
-    //     foreach (GameObject monsterObject in floors[current_floor])
-    //     {
-    //         monsterObject.SetActive(true);
-    //         Debug.Log($"Monstro ativado no andar {floor}");
-    //         balão.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = monsterObject.GetComponent<Monster>().targetFloor.ToString();
-    //         balão.SetActive(true);
-
-    //         //TO DO: LEVAR EM CONTA PESO DO MONSTRO E VER QUAL MONSTRO NA FILA PODE ENTRAR
-    //         //O PRIMEIRO E SEMPRE O QUE ENTRA E SE ELE PASSAR O PESO O ELEVADOR FICA PESADO E N ENTRA MAIS NINGUEM
-    //     }
-    // }
 
     public int hold()
     {

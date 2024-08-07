@@ -30,6 +30,11 @@ public class DoorController : MonoBehaviour
 
     IEnumerator MoveToFloor(int targetFloor, GameObject novo)
     {
+        if (targetFloor < 0 || targetFloor > monsterManager.maxFloor)
+        {
+            Debug.LogError($"Tentativa de mover para andar inválido: {targetFloor}");
+            yield break;
+        }
         isMoving = true;
 
         // Fechar a porta antes de mover
