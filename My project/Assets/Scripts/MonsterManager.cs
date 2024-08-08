@@ -8,17 +8,15 @@ using UnityEngine.SceneManagement;
 
 public class MonsterManager : MonoBehaviour
 {
-    //Monitora o estado do elevador: 0 se tds os botoes estiverem em posicao neutra
-    //1 se algum botao estiver apertado
     private int buttonsReleased;
 
     [SerializeField] private GameObject andarAtual;
-    [SerializeField] private GameObject victoryMessage; // Associe esse GameObject no inspector do Unity
-    [SerializeField] private GameObject[] monsterPrefabs; // Array de prefabs de monstros
+    [SerializeField] private GameObject victoryMessage;
+    [SerializeField] private GameObject[] monsterPrefabs;
     [SerializeField] private GameObject balão;
     [SerializeField] private Level[] levels;
 
-    private List<GameObject> elevator; // Lista de monstros na cena
+    private List<GameObject> elevator;
     [SerializeField] public int maxFloor;
 
     private List<GameObject>[] floors;
@@ -43,7 +41,6 @@ public class MonsterManager : MonoBehaviour
     {
         for (int i = 0; i < levels[current_level].qtd_monsters; i++)
         {
-            // Sorteia aleatoriamente o tipo de monstro a ser gerado
             GameObject monsterPrefab = monsterPrefabs[Random.Range(0, monsterPrefabs.Length)];
             GameObject monster = Instantiate(monsterPrefab, new Vector3(-5f, 0, 0), Quaternion.identity, transform);
 
@@ -96,20 +93,19 @@ public class MonsterManager : MonoBehaviour
             if (monster.targetFloor == floor)
             {
                 Debug.Log($"Monstro {monster.name} desativado ao chegar no andar {floor}");
-                
+
                 monstersToRemove.Add(monsterObject);
-                Destroy(monsterObject);
-                RemoveMonsterFromFloor(floor, monsterObject); // Adicione isto
             }
         }
 
         foreach (GameObject monsterToRemove in monstersToRemove)
         {
-            elevator.Remove(monsterToRemove);
+            RemoveMonsterFromElevator(monsterToRemove, floor);
+            Destroy(monsterToRemove);
         }
 
         UpdateBalloon();
-        CheckForVictory();  // Verifica se todos os monstros foram entregues
+        CheckForVictory();
     }
 
     public void AddToElevator(GameObject monster)
@@ -117,7 +113,7 @@ public class MonsterManager : MonoBehaviour
         elevator.Add(monster);
         UpdateBalloon();
     }
-    
+
     void UpdateBalloon()
     {
         if (elevator.Count > 0)
@@ -130,7 +126,7 @@ public class MonsterManager : MonoBehaviour
             balão.SetActive(false);
         }
     }
-    
+
     public void ActivateMonstersOnFloor(int floor)
     {
         if (floor > 0 && floor < floors.Length)
@@ -152,7 +148,7 @@ public class MonsterManager : MonoBehaviour
 
     public IEnumerator RespawnMonster(GameObject monsterPrefab, int respawnFloor)
     {
-        yield return new WaitForSeconds(6); // Tempo de respawn de 6 segundos
+        yield return new WaitForSeconds(6);
 
         GameObject monster = Instantiate(monsterPrefab, new Vector3(-5f, 0, 0), Quaternion.identity, transform);
         monster.GetComponent<Monster>().Initiate(respawnFloor, Random.Range(1, maxFloor), this);
@@ -163,14 +159,12 @@ public class MonsterManager : MonoBehaviour
 
     public int hold()
     {
-        //Retorna 1 se for possivel apertar o botao
         if (buttonsReleased == 0)
         {
             buttonsReleased = 1;
             return 1;
         }
 
-        //Retorno 0 caso contrario
         return 0;
     }
 
@@ -182,7 +176,7 @@ public class MonsterManager : MonoBehaviour
     void CheckForVictory()
     {
         bool allMonstersDelivered = true;
-        
+
         for (int i = 0; i < floors.Length; i++)
         {
             if (floors[i].Count > 0)
@@ -206,14 +200,11 @@ public class MonsterManager : MonoBehaviour
 
     IEnumerator HandleVictory()
     {
-        // Exibir uma mensagem de vitória na tela
         ShowVictoryMessage();
         print("Todos os monstros foram entregues");
 
-        // Aguarde alguns segundos antes de trocar a cena
         yield return new WaitForSeconds(5);
 
-        // Carrega a cena do menu principal
         SceneManager.LoadScene("Menu");
     }
 
