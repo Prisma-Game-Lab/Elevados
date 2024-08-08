@@ -32,7 +32,7 @@ public class Monster : MonoBehaviour
         if (currentFloor == targetFloor)
         {
             Debug.Log($"Monstro desativado ao chegar no andar {currentFloor}");
-            manager.RemoveFromElevator(gameObject);
+            manager.RemoveMonsterFromElevator(gameObject, currentFloor);
             Destroy(gameObject);
         }
     }

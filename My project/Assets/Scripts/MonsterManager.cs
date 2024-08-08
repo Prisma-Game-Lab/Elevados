@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class MonsterManager : MonoBehaviour
 {
@@ -12,17 +13,16 @@ public class MonsterManager : MonoBehaviour
     private int buttonsReleased;
 
     [SerializeField] private GameObject andarAtual;
-
+    [SerializeField] private GameObject victoryMessage; // Associe esse GameObject no inspector do Unity
     [SerializeField] private GameObject[] monsterPrefabs; // Array de prefabs de monstros
     [SerializeField] private GameObject balão;
     [SerializeField] private Level[] levels;
 
     private List<GameObject> elevator; // Lista de monstros na cena
-    [SerializeField] public int maxFloor = 7;
+    [SerializeField] public int maxFloor;
 
     private List<GameObject>[] floors;
     private int current_floor;
-
     private int current_level;
 
     void Start()
@@ -62,6 +62,26 @@ public class MonsterManager : MonoBehaviour
         }
     }
 
+    public void RemoveMonsterFromElevator(GameObject monster, int floor)
+    {
+        if (elevator.Contains(monster))
+        {
+            elevator.Remove(monster);
+            Debug.Log($"Monstro {monster.name} removido do elevador");
+        }
+
+        RemoveMonsterFromFloor(floor, monster);
+    }
+
+    void RemoveMonsterFromFloor(int floor, GameObject monster)
+    {
+        if (floors[floor].Contains(monster))
+        {
+            floors[floor].Remove(monster);
+            Debug.Log($"Monstro {monster.name} removido da lista do andar {floor}");
+        }
+    }
+
     public void OnElevatorArrived(int floor)
     {
         Debug.Log($"Elevador chegou ao andar {floor}");
@@ -79,6 +99,7 @@ public class MonsterManager : MonoBehaviour
                 
                 monstersToRemove.Add(monsterObject);
                 Destroy(monsterObject);
+                RemoveMonsterFromFloor(floor, monsterObject); // Adicione isto
             }
         }
 
@@ -88,17 +109,12 @@ public class MonsterManager : MonoBehaviour
         }
 
         UpdateBalloon();
+        CheckForVictory();  // Verifica se todos os monstros foram entregues
     }
 
     public void AddToElevator(GameObject monster)
     {
         elevator.Add(monster);
-        UpdateBalloon();
-    }
-    
-    public void RemoveFromElevator(GameObject monster)
-    {
-        elevator.Remove(monster);
         UpdateBalloon();
     }
     
@@ -161,5 +177,51 @@ public class MonsterManager : MonoBehaviour
     public void release()
     {
         buttonsReleased = 0;
+    }
+
+    void CheckForVictory()
+    {
+        bool allMonstersDelivered = true;
+        
+        for (int i = 0; i < floors.Length; i++)
+        {
+            if (floors[i].Count > 0)
+            {
+                Debug.Log($"Ainda há {floors[i].Count} monstros no andar {i}");
+                allMonstersDelivered = false;
+            }
+        }
+
+        if (elevator.Count > 0)
+        {
+            Debug.Log($"Ainda há {elevator.Count} monstros no elevador");
+            allMonstersDelivered = false;
+        }
+
+        if (allMonstersDelivered)
+        {
+            StartCoroutine(HandleVictory());
+        }
+    }
+
+    IEnumerator HandleVictory()
+    {
+        // Exibir uma mensagem de vitória na tela
+        ShowVictoryMessage();
+        print("Todos os monstros foram entregues");
+
+        // Aguarde alguns segundos antes de trocar a cena
+        yield return new WaitForSeconds(5);
+
+        // Carrega a cena do menu principal
+        SceneManager.LoadScene("Menu");
+    }
+
+    void ShowVictoryMessage()
+    {
+        if (victoryMessage != null)
+        {
+            victoryMessage.SetActive(true);
+        }
     }
 }

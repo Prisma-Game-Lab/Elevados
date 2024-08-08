@@ -1,14 +1,17 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine.SceneManagement;
 
 public class Cronometro : MonoBehaviour
 {
     public TextMeshProUGUI cronometroText;
-    public int tempoInicialEmSegundos = 180; // 3 minutos em segundos
-    private float tempoRestante;
+    public int tempoInicialEmSegundos; // minutos em segundos
+    private float tempoRestante; 
     private bool cronometroAtivo = false;
     private bool elevadorSaiuDoAndarInicial = false;
+    [SerializeField] private GameObject gameOverMessage; // Associe no Inspector
 
     void Start()
     {
@@ -25,7 +28,6 @@ public class Cronometro : MonoBehaviour
 
             if (tempoRestante <= 0)
             {
-                cronometroAtivo = false;
                 tempoRestante = 0;
                 AtualizarCronometroText();
                 GameOver();
@@ -52,9 +54,27 @@ public class Cronometro : MonoBehaviour
 
     private void GameOver()
     {
-        // Lógica de fim de jogo, como exibir a pontuação final
-        Debug.Log("Game Over!");
-        SceneManager.LoadScene("GameOverScene"); // Assumindo que você tem uma cena de Game Over
+        // Exibe a mensagem de Game Over
+        ShowGameOverMessage();
+
+        // Aguarda alguns segundos e volta ao menu principal
+        StartCoroutine(ReturnToMenuAfterDelay());
+    }
+
+    private void ShowGameOverMessage()
+    {
+        if (gameOverMessage != null)
+        {
+            gameOverMessage.SetActive(true);
+        }
+    }
+
+    private IEnumerator ReturnToMenuAfterDelay()
+    {
+        yield return new WaitForSeconds(5); // Aguarda 5 segundos
+
+        // Carrega a cena do menu principal
+        SceneManager.LoadScene("Menu");
     }
 
     public void ElevadorSaiuDoAndarInicial()
