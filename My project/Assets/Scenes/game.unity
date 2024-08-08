@@ -2886,7 +2886,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &968974629
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2903,8 +2903,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 650, y: -400.29}
-  m_SizeDelta: {x: 137.9284, y: 61.5782}
+  m_AnchoredPosition: {x: 581, y: -355}
+  m_SizeDelta: {x: 101.9684, y: 124.7937}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &968974630
 MonoBehaviour:
@@ -2953,8 +2953,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 86.2
-  m_fontSizeBase: 86.2
+  m_fontSize: 164.2
+  m_fontSizeBase: 164.2
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3012,9 +3012,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 968974628}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6662e74959eceb34da298124f1886e0c, type: 3}
+  m_Script: {fileID: 11500000, guid: 2016c5857019dc64fb1c15ae42e6e471, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score: 0
+  targetScore: 10
   scoreText: {fileID: 968974630}
 --- !u!1 &1044857906
 GameObject:

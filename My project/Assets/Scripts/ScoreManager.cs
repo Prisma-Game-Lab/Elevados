@@ -1,16 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement; // Para carregar cenas de vitória/derrota
 using System;
+using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager instance; // Singleton
 
-    public int score = 0;
-    public int targetScore = 15; // Pontuação necessária para ganhar
+    public int score;
+    public int targetScore; // Pontuação necessária para ganhar
     public event Action<int> onScoreChanged; // Evento de mudança de pontuação
+    [SerializeField] private TextMeshProUGUI scoreText; // Referência ao componente de texto
 
     void Awake()
     {
@@ -24,32 +25,39 @@ public class ScoreManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    void Start()
+    {
+        // Atualiza o texto com a pontuação inicial
+        UpdateScoreText();
+    }
 
     public void AddScore(int points)
     {
         score += points;
         Debug.Log("Pontuação atual: " + score);
         onScoreChanged?.Invoke(score); // Notifica os inscritos sobre a mudança de pontuação
+        UpdateScoreText(); // Atualiza o texto com a nova pontuação
         CheckWinCondition();
+    }
+
+    private void UpdateScoreText()
+    {
+        if (scoreText != null)
+        {
+            scoreText.text = score.ToString();
+        }
     }
 
     private void CheckWinCondition()
     {
         if (score >= targetScore)
         {
-            // Carrega a cena de vitória
-            SceneManager.LoadScene("WinScene");
+            // Chama o método de vitória no MonsterManager
+            MonsterManager monsterManager = FindObjectOfType<MonsterManager>();
+            if (monsterManager != null)
+            {
+                monsterManager.TriggerVictory();
+            }
         }
-    }
-
-    public void GameOver()
-    {
-        // Carrega a cena de derrota
-        SceneManager.LoadScene("GameOverScene");
-    }
-
-    public int GetScore()
-    {
-        return score;
     }
 }

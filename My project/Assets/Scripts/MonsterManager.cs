@@ -95,6 +95,14 @@ public class MonsterManager : MonoBehaviour
                 Debug.Log($"Monstro {monster.name} desativado ao chegar no andar {floor}");
 
                 monstersToRemove.Add(monsterObject);
+                if (ScoreManager.instance != null)
+                {
+                    ScoreManager.instance.AddScore(1);
+                }
+                else
+                {
+                    Debug.LogError("ScoreManager instance is null! Ensure ScoreManager is properly initialized.");
+                }
             }
         }
 
@@ -173,6 +181,29 @@ public class MonsterManager : MonoBehaviour
         buttonsReleased = 0;
     }
 
+    public void TriggerVictory()
+    {
+        StopAllCoroutines(); // Para o cronômetro ou qualquer outra rotina em andamento
+        ShowVictoryMessage();
+
+        // Aguarda alguns segundos antes de trocar a cena para o menu
+        StartCoroutine(ReturnToMenuAfterDelay());
+    }
+
+    IEnumerator ReturnToMenuAfterDelay()
+    {
+        yield return new WaitForSeconds(5); // Tempo de exibição da mensagem de vitória
+        SceneManager.LoadScene("Menu"); // Carrega a cena do menu principal
+    }
+    
+    void ShowVictoryMessage()
+    {
+        if (victoryMessage != null)
+        {
+            victoryMessage.SetActive(true);
+        }
+    }
+
     void CheckForVictory()
     {
         bool allMonstersDelivered = true;
@@ -201,18 +232,9 @@ public class MonsterManager : MonoBehaviour
     IEnumerator HandleVictory()
     {
         ShowVictoryMessage();
-        print("Todos os monstros foram entregues");
+        Debug.Log("Todos os monstros foram entregues");
 
-        yield return new WaitForSeconds(5);
-
+        yield return new WaitForSeconds(5); // Tempo de espera antes de voltar ao menu
         SceneManager.LoadScene("Menu");
-    }
-
-    void ShowVictoryMessage()
-    {
-        if (victoryMessage != null)
-        {
-            victoryMessage.SetActive(true);
-        }
     }
 }
