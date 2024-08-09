@@ -9,6 +9,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1353635600060874813, guid: 398b9ecbd39bd8f4380d53e3b5d82049, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353635600060874813, guid: 398b9ecbd39bd8f4380d53e3b5d82049, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353635600060874813, guid: 398b9ecbd39bd8f4380d53e3b5d82049, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -52,6 +60,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 415720067c6f42a46b79e4111d353e50, type: 3}
+    - target: {fileID: 2472612893142741759, guid: 398b9ecbd39bd8f4380d53e3b5d82049, type: 3}
+      propertyPath: m_Color.a
+      value: 0.7058824
+      objectReference: {fileID: 0}
     - target: {fileID: 4948845231422005302, guid: 398b9ecbd39bd8f4380d53e3b5d82049, type: 3}
       propertyPath: m_Name
       value: Monstro Variant
